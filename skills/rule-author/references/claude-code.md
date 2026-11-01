@@ -28,9 +28,13 @@ launch, concatenated from the root down; a subdirectory's file loads when
 Claude first reads, writes, or edits a file there. Content arrives as a
 user message after the system prompt and is context, not enforcement.
 The project-root file is re-read and re-injected after compaction;
-subdirectory files and path-scoped rules are not. `AGENTS.md` is read in
-place of `CLAUDE.md` only when no `CLAUDE.md` or `CLAUDE.local.md` exists
-in or above the working directory (v2.1.277 or later), and
+subdirectory files and path-scoped rules are not. From v2.1.277 Claude
+Code can read `AGENTS.md` itself. By default (the **Project instructions**
+setting `claude-md-or-agents-md`) it reads `AGENTS.md` in place of
+`CLAUDE.md` only when no `CLAUDE.md`, `.claude/CLAUDE.md`, or
+`CLAUDE.local.md` is in or above the working directory; the user's
+`~/.claude/CLAUDE.md`, a managed `CLAUDE.md`, and `.claude/rules/` do not
+count. A `CLAUDE.md` that imports `@AGENTS.md` never loads it twice.
 `AGENTS.override.md`, `AGENTS.local.md`, and `.agents/` are never read.
 `claudeMdExcludes` skips files by pattern. The vendor's size guidance:
 under 200 lines per file; longer files reduce adherence, and splitting or

@@ -189,7 +189,7 @@ about each one.
 | `skills/ai-repo-author/` | Turns skills and rules into a git repository that people link into a harness, or audits an existing one: dependencies, data, personal data, migration, `link.sh`, versioning, README, and license. | `link-script-source` (required), `license-holder` (required), `migrate-skill`, `rule-skill`, `doc-skill` |
 | `skills/skill-rule-shared/` | Not a skill. The ledger, evaluation method, eval scripts, prose standards, and the skill-versus-rule decision framework that `skill-author` and `rule-author` share. | — |
 | `link.sh` | The link script described above. It has its own version and its own copy of the license notice; see [Versioning](#versioning). | — |
-| `AGENTS.md` | Instructions for agents that work on this repository: the version procedure. `link.sh` does not link it. `CLAUDE.md` and `GEMINI.md` import it for the harnesses that do not read `AGENTS.md`. | — |
+| `AGENTS.md` | Instructions for agents that work on this repository: the version procedure. `link.sh` does not link it. `CLAUDE.md` and `GEMINI.md` import it for the harnesses and versions that do not read `AGENTS.md` directly. | — |
 | `VERSION` | The version of the repository; see [Versioning](#versioning). | — |
 
 Every key without "(required)" is optional and defaults to none. A skill

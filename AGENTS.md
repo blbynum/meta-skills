@@ -5,8 +5,8 @@
 These instructions are for agents that work on this repository. They do
 not ship to users: keep this file at the repository root, never in
 `skills/` or `rules/`, and never link it into a harness. `CLAUDE.md` and
-`GEMINI.md` import this file for the harnesses that do not read
-`AGENTS.md`.
+`GEMINI.md` import this file for the harnesses and versions that do not
+read `AGENTS.md` directly.
 
 ## Versioning
 
