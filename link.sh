@@ -95,7 +95,9 @@ Usage:
 $PROG links the skills and rules of the git repository that contains it
 into the user-level directories of an AI coding harness. Each link is a
 symbolic link into the repository, so the harness reads the skills and
-rules from the repository.
+rules from the repository. $PROG is not tied to one repository: copy it
+into the root of any git repository that has the shape shown under
+"Repository shape".
 
 With no arguments, $PROG shows a numbered list of harnesses and asks for
 a number. Type 0 for a custom harness; $PROG then asks for the
