@@ -409,7 +409,7 @@ skill's own `sources.md` otherwise.
   command already uses that name" — so a personal `skill-creator` and the
   desktop's `anthropic-skills:skill-creator` would both load, the bare name
   resolves to the personal one, and the model sees both in the listing (the
-  collision is a description contest, not a name override). Ben's decision
+  collision is a description contest, not a name override). The user's decision
   the same day: rename every `-creator` skill to `-author`
   (`skill-author`, `rule-author`, `agent-author`, `persona-author`) so no
   personal skill shares a last segment with an anthropic-skills entry, and

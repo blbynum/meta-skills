@@ -65,10 +65,10 @@ Run it again with each directory under MUST COME ALONG added as an
 argument: the directories that move are checked too, and a shared
 directory that names a skill shows up only then.
 
-The script skips `evals/`, `sources.md`, and `CHANGELOG.md`. It cannot see
-a tool named only in prose, a hand-off phrased without a name, or a data
-directory named only through a config value. Read each candidate's
-`SKILL.md` and `config.local.yaml` for those.
+The script skips `evals/`, `retired/`, `sources.md`, and `CHANGELOG.md`.
+It cannot see a tool named only in prose, a hand-off phrased without a
+name, or a data directory named only through a config value. Read each
+candidate's `SKILL.md` and `config.local.yaml` for those.
 
 ## The closure
 
