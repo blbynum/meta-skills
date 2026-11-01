@@ -2208,13 +2208,20 @@ framework's config bullet. Session 4b9d2382-e133-42cd-9deb-18f9093fcab0.
   repository"; precedence personal > repository > organization, personal
   instructions live in the UI; no security statement. Same grounds.
 
-### Gemini CLI context files (not opened)
-- URL: https://geminicli.com/docs/cli/gemini-md — seen in a WebSearch
-  summary only, 2026-10-30; not fetched.
-- Supports, at summary grade: default context file `GEMINI.md`, a global
-  `~/.gemini/GEMINI.md`, and a `context.fileName` list that may include
-  `AGENTS.md`. Used in the 2026-10-30 assessment table with that caveat;
-  skill-config.md makes no claim that depends on it.
+### Gemini CLI context files
+- URL: https://geminicli.com/docs/cli/gemini-md
+- Last verified: 2026-11-01 (WebFetch extraction; first fetch, the
+  2026-10-30 entry was from a search summary only).
+- Supports: default context file `GEMINI.md`; global
+  `~/.gemini/GEMINI.md`; project files found "in your configured
+  workspace directories and their parent directories", and
+  subdirectory files loaded just in time when a tool touches the
+  directory; `context.fileName` in `settings.json` takes a name or a
+  list, for example `["AGENTS.md", "CONTEXT.md", "GEMINI.md"]`; imports
+  with `@file.md`, "both relative and absolute paths". Import depth and
+  size limits are not stated on the page; it points to the Memory Import
+  Processor page, not opened. Grounds `rule-author/references/gemini-cli.md`
+  and the root `GEMINI.md` of this repository.
 
 ### Claude Code setup page (Windows shell)
 - URL: https://code.claude.com/docs/en/setup
