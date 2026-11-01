@@ -21,7 +21,7 @@ metadata:
   last-verified: "2026-10-31"
 ---
 
-# Skill Creator
+# Skill Author
 
 This skill produces and maintains one artifact kind: the **skill** — a
 directory `<name>/SKILL.md` plus optional `references/` and `scripts/`,
