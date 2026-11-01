@@ -33,7 +33,7 @@ file held every skill's provenance.
 - Tier 1: Anthropic official
 - Tier 1: other vendor documentation
 - Tier 2: research
-- Artifact tooling: direct inspection
+- Artifact tooling
 - Tier 3: community (corroborated or labeled)
 - Artifact subject-matter sources
 - prompt-author skill subject-matter sources
@@ -293,10 +293,7 @@ skill's own `sources.md` otherwise.
   change, so it applies most edits to the running session without a restart,
   including edits to `permissions`, `hooks`, and credential helpers"; the
   terminal, the IDE extensions, and the desktop app "all read the same
-  settings files". Confirmed by direct inspection the same day: a deny added
-  to `~/.claude/settings.json` by the running desktop session (app 2.1.295)
-  refused the next call with "Permission to use mcp__ccd_turn__wrap_up has
-  been denied", no restart. Three more facts for deny work: app-internal
+  settings files". Three more facts for deny work: app-internal
   tools of the desktop Code tab are MCP tools (`mcp__ccd_turn__*`,
   `mcp__ccd_session__*`) and a deny reaches them like any server's; "When
   Claude Code loads a settings file, it skips any `mcp__` rule that has
@@ -389,9 +386,7 @@ skill's own `sources.md` otherwise.
   re-verified on this pass. New facts recorded this pass: live change
   detection — "When you add, edit, or remove a skill under
   `~/.claude/skills/` ... Claude Code picks up the change within the
-  current session, without a restart" (observed live the same day: a
-  freshly written skill appeared in the writing session's own roster);
-  custom commands are merged into skills, a `.claude/commands/` file and a
+  current session, without a restart"; custom commands are merged into skills, a `.claude/commands/` file and a
   skill directory create the same command; nested `.claude/skills/` below
   the working directory load lazily when a file there is first touched).
   Previous: 2026-08-19 (re-fetched as `skills.md`, 1,070 lines, for the
@@ -528,9 +523,7 @@ skill's own `sources.md` otherwise.
   value inherited from the shell"; "Subprocesses still inherit" values; the
   file-to-scope table repeats the settings page (local file "gitignored
   when Claude Code saves a setting to it; add it to your gitignore if you
-  create it by hand"). Direct inspection the same day (entry under
-  Artifact tooling) confirms an `env` value passed with `--settings`
-  reaches a skill's injected `!` command. Not stated on the portion read:
+  create it by hand"). Not stated on the portion read:
   whether `CLAUDE_SKILL_DIR` is exported to the Bash tool (the plugin
   manifest reference says the plugin path variables are not).
 
@@ -1177,7 +1170,7 @@ claims about its own models only.
   suggesting that social sycophancy is invariant to model size". An earlier
   version of this entry listed three types; v2 names four (v1 named five
   behaviors). Grounds the correct-the-premise line and the no-hedging line.
-## Artifact tooling: direct inspection
+## Artifact tooling
 
 ### skill-rule-shared scripts (formerly under skill-rule-creator) — Claude Code CLI surface
 - Source: `claude --help` and a probe run of `claude -p --output-format json`
@@ -1192,56 +1185,15 @@ claims about its own models only.
   `--verbose`. The `result` event carries `total_cost_usd`, `duration_ms`,
   `num_turns`, `is_error`, `result`, and a `usage` map with `input_tokens`,
   `output_tokens`, and the cache token counts — these are the metric field
-  names ab_eval.py reads.
-- Re-inspected 2026-08-18 on Claude Code 2.1.220 (the `claude` on PATH; the
-  desktop app was 2.1.227–229). The `system`/`init` event carries
-  `claude_code_version`, `model` (the resolved id, e.g. `claude-opus-5` when
-  no `--model` was passed), `skills` (the roster of loaded skill names),
-  `slash_commands`, `plugins` (name, source, version, path), and `tools` —
-  the fields the scripts now record per run. `--settings
-  '{"skillOverrides":{"<name>":"off"}}'` on the command line removes exactly
-  that skill from the `skills` roster and leaves every other skill, plugin,
-  and hook loaded (probe: 42 skills without the override, 41 with, the one
-  missing being the named skill); this is the targeted baseline `ab_eval.py
-  --mode skill` uses. `--disallowed-tools "Skill(<name>)"` is added as a
-  second guard. A `result` event with `is_error: true` and `total_cost_usd:
-  0` is what an API 529 looks like; the scripts count those runs as failed
-  rather than as cheap fast runs. The `result` event's `modelUsage` map
-  carries, per model id, `contextWindow`, `maxOutputTokens`,
-  `canonicalModel`, and token counts — on 2026-08-18 the CLI's default
-  resolved to `claude-opus-5` with `contextWindow: 1000000`, so the 1%
-  skill-listing budget there is about 10,000 tokens, and a 42-skill roster
-  of about 20,000 characters was not truncated. In the desktop app (Fable 5)
-  the same day, every listed description was complete at the same roster
-  size, so the budget did not bite in either surface. `claude plugin details
-  <plugin>` reports a plugin's projected token cost; note it labels a
-  SessionStart hook "harness-only — no model context cost" even when the
-  hook injects text into the model's context (superpowers' hook injected
-  its ~1.1k-token using-superpowers skill every session on top of the ~688
-  always-on listing tokens it reported).
-- Probed 2026-08-18 (Claude Code 2.1.220) for the split: a directory under
-  `~/.claude/skills/` that holds a `README.md` and no `SKILL.md` is ignored
-  silently — the `init` event's `skills` roster stayed at 28, `--debug`
-  logged nothing about it, and the run completed. The skills doc does not
-  say what happens to such a directory, so this is inspected behavior only;
-  it is what allows `~/.claude/skills/skill-rule-shared/` to hold the
-  ledger, the eval scripts, and the shared references without being a skill.
-- Corpus record on the desktop collision (72 sessions, 2026-08-06 to
-  2026-08-17): the model invoked `anthropic-skills:skill-creator` in one
-  session after skill-rule-creator existed (cd0e864b, 2026-08-16, on "how is
-  that kind of testing done?" — a question about A/B-testing skills, rules,
-  and prompts; skill-rule-creator loaded later in the same session) and once
-  more in the session that created skill-rule-creator; the user invoked it
-  once by slash on 2026-08-06. So the collision was observed once on a
-  testing/eval question, which is the vocabulary the vendor description
-  carries and the old description did not.
+  names ab_eval.py reads. The `system`/`init` event carries
+  `claude_code_version`, `model` (the resolved id), `skills` (the roster of
+  loaded skill names), `slash_commands`, `plugins`, and `tools` — the
+  fields the scripts record per run. `ab_eval.py --mode skill` builds its
+  targeted baseline with `--settings '{"skillOverrides":{"<name>":"off"}}'`
+  and `--disallowed-tools "Skill(<name>)"` as a second guard.
 - Caveat: CLI flags and the result schema are internal to Claude Code and can
   change between releases. When a script's output looks wrong, suspect a
   flag or field rename before suspecting the model.
-- Measured on the probe run: a one-word task on Sonnet 5 cost $0.23 and ran
-  four turns, because every session pays for the full loaded configuration.
-  Eval cost scales with run count, not task size — the reason 5b is gated
-  rather than routine.
 
 ### skill-creator plugin eval harness — vendor runner and why the in-house scripts exist
 - Sources: https://code.claude.com/docs/en/skills (section "Run evals with
@@ -1249,10 +1201,8 @@ claims about its own models only.
   (March 3, 2026) ; https://raw.githubusercontent.com/anthropics/skills/main/skills/skill-creator/SKILL.md
   and its `scripts/run_eval.py`, `scripts/run_loop.py`,
   `scripts/aggregate_benchmark.py`, `eval-viewer/generate_review.py`,
-  `agents/comparator.md` ; local session records `~/ai/insights-v2/corpus/`
-  `2de4eb6d` (2026-08-06) and `cd0e864b` (2026-08-15/16)
-- Last verified: 2026-08-18 (doc, blog, and SKILL.md fetched and read;
-  the two session transcripts read)
+  `agents/comparator.md`
+- Last verified: 2026-08-18 (doc, blog, and SKILL.md fetched and read)
 - What exists: a vendor harness that "automates the comparison loop inside
   Claude Code": eval cases in `evals/evals.json`, one subagent per case,
   grading to `grading.json`, a with-versus-without benchmark
@@ -1263,23 +1213,6 @@ claims about its own models only.
   "improved triggering on 5 out of 6 public skills". `run_eval.py` writes
   a temporary command file into `.claude/commands/`, runs `claude -p`, and
   detects a trigger from stream events.
-- The record: on 2026-08-06 the vendor harness was used to build
-  study-credibility — three eval prompts, each run with the skill and as a
-  bare baseline in parallel subagents, timing per arm, assertions graded,
-  `benchmark.md` aggregated with the vendor script (which needed a `run-N/`
-  layer added), a static review page generated. On 2026-08-15 the session
-  that added step 5b read `run_eval.py` and `agents/analyzer.md`, judged
-  the two tools "solve different problems and only overlap at one step"
-  (skill-rule-creator is "a research-and-authoring pipeline; the
-  skill-creator harness is a measurement pipeline"), and chose to write
-  `trigger_eval.py` and `ab_eval.py` for three stated reasons: the vendor
-  scripts lived under an install-scoped path with two UUIDs
-  (`local-agent-mode-sessions/skills-plugin/<uuid>/<uuid>/...`) that must
-  not be hardcoded; most of the harness would go unused; and rules — which
-  cannot be trigger-tested and need an A/B mode of their own — have no
-  counterpart there. The CHANGELOG of that day (skill-rule-shared's, at
-  version 2.0.1) recorded only "no built-in runner", which was wrong;
-  corrected 2026-08-18.
 - What the in-house scripts add over the vendor harness: a rule A/B mode
   (`--mode rule`), near-miss trigger sets graded by the author, cost and
   transcript capture per run, and a stable path under this skill. What the
@@ -1288,10 +1221,9 @@ claims about its own models only.
   a reason to drop the other; when a description needs tuning rather than
   measuring, the vendor loop is the tool.
 
-### Claude Code dynamic workflows — doc plus direct inspection
+### Claude Code dynamic workflows
 - URLs: https://code.claude.com/docs/en/workflows (fetched as `workflows.md`)
-  ; run files inspected under `~/.claude/projects/` (Claude Code 2.1.229)
-- Last verified: 2026-08-18 (fetched; files inspected)
+- Last verified: 2026-08-18 (fetched)
 - Supports: a workflow needs a user opt-in, and "Claude treats a direct
   request as the same opt-in" as the `ultracode` keyword — so a skill whose
   body launches a saved workflow is itself only ever run on the user's
@@ -1302,110 +1234,12 @@ claims about its own models only.
   ("Read at startup, so it applies wherever you set it"), or the eval can
   start the real run. Also: "Every run writes its script to a file under
   your session's directory in `~/.claude/projects/`" — the doc names the
-  script, not the result. Inspected: the completed run is written to
-  `~/.claude/projects/<cwd-slug>/<session-id>/workflows/<run-id>.json` with
-  keys including `runId`, `status`, `scriptPath`, `result`, `agentCount`,
-  `logs`, `totalTokens`, `durationMs`; the per-agent journal is
-  `subagents/workflows/<run-id>/journal.jsonl`. Resume "works within the
-  same Claude Code session"; a `Large workflow` warning appears past 25
-  agents or a projected 1.5 million tokens. Saved workflows live in
-  `~/.claude/workflows/` or `.claude/workflows/` and run as `/<name>` with an
-  `args` global. Caveat: the result-file path is inspected, not documented,
-  and can change between releases.
+  script, not the result. Resume "works within the same Claude Code
+  session"; a `Large workflow` warning appears past 25 agents or a
+  projected 1.5 million tokens. Saved workflows live in
+  `~/.claude/workflows/` or `.claude/workflows/` and run as `/<name>` with
+  an `args` global.
 
-### Claude Code 2.1.220 — `allowed-tools` skills prompt on invocation (direct inspection, 2026-08-19)
-- Method: `claude -p "Use the Skill tool to invoke the skill named sleuth
-  ..."` with `--permission-mode acceptEdits`, three variants of the same
-  SKILL.md: (a) `allowed-tools: WebSearch WebFetch Bash(curl *) Bash(python3
-  ${CLAUDE_SKILL_DIR}/scripts/graph_check.py *)`, (b) `allowed-tools:
-  WebSearch WebFetch`, (c) no `allowed-tools`. Also observed in 3 of 3
-  with-arm runs of an A/B eval on the (a) version.
-- Last verified: 2026-08-19.
-- Supports: with (a) and (b) the Skill tool result is `{"content":
-  "Execute skill: sleuth", "is_error": true}` and the body never enters
-  context; with (c) the result is `Launching skill: sleuth` and the body
-  loads. The skills doc says "an `allowed-tools` grant goes through the
-  normal permission flow", which is consistent: the grant is a permission
-  decision, and a non-interactive session has no one to approve it. Also
-  confirmed in the same run: `${CLAUDE_SKILL_DIR}` in the body is
-  substituted with the absolute skill directory when the skill is
-  model-invoked (the model ran `python3
-  ~/.claude/skills/sleuth/scripts/graph_check.py --init ./case`),
-  and Bash then prompted ("This command requires approval") as expected
-  without a grant. Grounds the `allowed-tools` bullet in
-  skill-standards.md and the hazard note in evaluating.md.
-
-### Claude Code 2.1.287 — skill local-config injection, `allowed-tools`, symlinked skill dirs (direct inspection, 2026-10-24)
-- Method: a throwaway project in the session scratchpad with
-  `.claude/skills/<name>/SKILL.md` variants, each run with `claude -p
-  "/<name>"` or a model-triggering prompt, `--model haiku`,
-  `--permission-mode acceptEdits`, plain text or `--output-format
-  stream-json --verbose`. The body printed marker lines around an injected
-  block so the rendered text could be read back. Scripts and outputs under
-  the scratchpad `cfgtest-proj/` (`results*.txt`). Eleven runs in all.
-- Last verified: 2026-10-24.
-- Supports, for a USER-typed `/name` invocation:
-  (1) `` !`cat "${CLAUDE_SKILL_DIR}/config.local.md" 2>/dev/null || echo
-  NO_LOCAL_CONFIG` `` with no `allowed-tools` aborts the invocation
-  silently — `-p` prints nothing; `--output-format json` shows
-  `"num_turns":0`, `"result":""`, `"is_error":false`, no error text (runs
-  1–3 and 0). The same file with `disableSkillShellExecution: true` renders
-  with each placeholder replaced by `[shell command execution disabled by
-  policy]` and `${CLAUDE_SKILL_DIR}` substituted (run 4).
-  (2) A bundled script `scripts/local-config.sh` (prints `config.local.md`
-  if present, else a fallback line; always exit 0) invoked as
-  `` !`${CLAUDE_SKILL_DIR}/scripts/local-config.sh config.local.md` ``
-  with `allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/local-config.sh
-  *)` renders every time: fallback text when the file is absent (run 5),
-  the file's content when present (run 6), and `ENV=notes` when the run
-  carried `--settings '{"env":{"RESEARCH_NOTES_SKILL":"notes"}}'` (run 7)
-  — so a settings `env` value reaches the injection subprocess.
-  (3) The same skill reached through a symlink
-  (`.claude/skills/cfglink -> <elsewhere>/cfgreal`) renders identically,
-  and `${CLAUDE_SKILL_DIR}` resolves to the symlink path, not the target
-  (run 10). Grounds the clone-and-symlink deployment of a shared skill.
-- Supports, for a MODEL-invoked skill (Skill tool) in the same `-p`
-  acceptEdits sessions: with `allowed-tools` set, the tool result is
-  `{"content":"Execute skill: cfgmodel","is_error":true}` in 3 of 3
-  stream-json runs (8.1–8.3), the body never enters context, and the model
-  then improvises (reads SKILL.md with Read, asks for approval, or claims
-  success). This reproduces the 2.1.220 finding above on 2.1.287 after the
-  2.1.295-dated "allowed-tools ... dropped" fix in the changelog, which
-  this install predates. Without `allowed-tools` (run 9) the body DID load
-  for model invocation, carrying an instruction to run the injected
-  command first, which the model then asked permission for — so for model
-  invocation the non-allowed command defers rather than aborts, the
-  opposite of the user-invoked case in (1). Both are single-model,
-  one-version observations; the two asymmetries (abort vs defer;
-  user-invoked fine vs model-invoked denied) are what a public skill that
-  injects a config file must design around.
-- Also read this pass: the Claude Code CHANGELOG (raw, main, 9,483 lines,
-  top entry 2.1.310; local install 2.1.287). Version anchors:
-  `${CLAUDE_SKILL_DIR}` 2.1.69; `${CLAUDE_PLUGIN_DATA}` 2.1.78; plugin
-  `userConfig` "now available externally" 2.1.83; `disableSkillShellExecution`
-  2.1.91; `pluginConfigs` no longer read from project settings and
-  `${user_config.*}` rejected in shell-form commands 2.1.207; auto mode's
-  inline `!` commands "follow default-mode permission rules instead of the
-  classifier" 2.1.271; `claude plugin configure` 2.1.285; `!` commands with
-  raw control characters refused 2.1.290; the `allowed-tools`-dropped fix
-  2.1.295. A public skill that relies on `!` injection with a pre-approved
-  script therefore needs 2.1.69+ for the variable and behaves as measured
-  here on 2.1.287; the auto-mode path was not exercised.
-- Addendum, same day, same method: `@path` references in a skill body do
-  not import or attach the file in a `-p` session on 2.1.287. Three forms
-  (`@${CLAUDE_SKILL_DIR}/config.local.md`, `@config.local.md`,
-  `@.claude/skills/<name>/config.local.md`) all reached the model as
-  literal text; the file's marker string appeared zero times in the full
-  `--output-format stream-json --verbose` stream; with the file removed the
-  skill still loaded (1 turn, no error). The skills doc's only mention is
-  in the synced-skills section, which says a synced skill "doesn't attach
-  the files that `@` references name the way it does for a local skill" —
-  behavior this non-interactive test could not reproduce, and which the
-  page nowhere describes. The CHANGELOG has no entry for `@` file
-  references in skill bodies. So `!` injection is the one documented way
-  to put a file's contents into skill text; `@` imports belong to
-  CLAUDE.md. Grounds the "why not import" answer in the research skill's
-  design.
 ## Tier 3: community (corroborated or labeled)
 
 ### SkillsBench (skillsbench.ai and arXiv 2602.12670)
@@ -1582,35 +1416,6 @@ claims about its own models only.
   so the ai-retrospective skill now instructs the agent to verify this on the
   first compacted session it meets rather than assert it. Also grounds the
   context-window-as-binding-constraint framing used to rank findings by cost.
-### ai-retrospective skill — session transcript format
-- Source: direct inspection of `~/.claude/projects/<cwd-slug>/<id>.jsonl`
-  (Claude Code 2.1.229)
-- Last verified: 2026-08-15 (inspected)
-- Caveat: the entry format is internal to Claude Code and can change between
-  releases, so a parser built on it is a maintenance liability, not a stable
-  interface. The skill's script now says to suspect a format change first
-  when its output looks wrong.
-- Supports: slug is the cwd with non-alphanumerics replaced by hyphens;
-  record `type` values `user`, `assistant`, `attachment`, `queue-operation`,
-  `last-prompt`, `custom-title`, `ai-title`, `system`, `mode`; failed calls
-  carry `is_error: true` on the `tool_result` block; large results spill to a
-  `<session-id>/tool-results/<tool_use_id>` sidecar directory; `message.model`
-  and `version` give the model and CLI that ran the session. Two findings that
-  drove the skill's design: parallel tool calls are written as one JSONL
-  record per content block sharing a `message.id`, so per-record counting
-  falsely reports missed parallelism; and `leafUuid` appears on routine
-  `last-prompt` records, so it is not a compaction signal. Subagent turns did
-  not appear as `isSidechain` records in any inspected transcript. Inspected
-  2026-08-18 (Claude Code 2.1.220–2.1.229 transcripts): each subagent writes
-  its own file at `<session-id>/subagents/agent-<id>.jsonl` beside the main
-  transcript, and workflow agents write under
-  `<session-id>/subagents/workflows/<run-id>/`; a denied tool call is a
-  `tool_result` with `is_error: true` plus a top-level `toolDenialKind` on
-  the record (values seen: `permission-rule`, `user-rejected`,
-  `automode-unavailable`, `automode-blocked`). An earlier version of the
-  ai-retrospective reference said denials do not carry `is_error`; corrected.
-  `mcp__ccd_session_mgmt__get_session` and `list_events` both refuse the
-  current session.
 ### research skill — tier 1: Anthropic and Claude Code
 - URLs: https://www.anthropic.com/engineering/multi-agent-research-system ,
   https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool ,
@@ -1945,7 +1750,7 @@ claims about its own models only.
   as approximate trends and never as precise rates.
 ## prompt-author skill subject-matter sources
 
-### Claude Code `/goal` — doc plus direct inspection (2026-10-29)
+### Claude Code `/goal` (2026-10-29)
 - URLs: https://code.claude.com/docs/en/goal (fetched in full as raw
   markdown, `goal.md`, 2026-10-29) ; https://code.claude.com/docs/en/commands
   (`commands.md`, the `/goal` row and the table preamble) ;
@@ -1953,8 +1758,7 @@ claims about its own models only.
   skills in one message" and "Restrict Claude's skill access") ;
   https://code.claude.com/docs/en/desktop (`desktop.md`, grep only, no
   `/goal` mention).
-- Last verified: 2026-10-29 (first entry; local CLI 2.1.287, the desktop
-  transcripts inspected record 2.1.309).
+- Last verified: 2026-10-29 (first entry; local CLI 2.1.287).
 - Supports (verbatim where quoted), goal page: "The `/goal` command sets a
   completion condition and Claude keeps working toward it without you
   prompting each step. After each turn, a model checks whether the
@@ -1991,9 +1795,7 @@ claims about its own models only.
   same table is marked **Skill**. skills.md: "A few built-in commands are
   also available through the Skill tool, including `/init` and
   `/security-review`. Other built-in commands such as `/compact` are
-  not." Direct inspection, this session (desktop Code tab, 2026-10-29):
-  the Skill tool's roster lists `init`, `security-review`, and `loop` and
-  no `goal`, so an agent cannot set a goal; the user types it.
+  not."
 - Placement, skills.md verbatim: "When you type at the Claude Code prompt
   in your terminal, you can stack several skills at the start of one
   message. Through the Agent SDK or `claude -p`, Claude Code loads only
@@ -2004,75 +1806,21 @@ claims about its own models only.
   ends there. That token and everything after it become the argument text
   for every expanded skill." `/goal` is not a skill, so a `/goal` after a
   skill ends expansion and becomes argument text in every mode.
-- Direct inspection, transcript
-  `~/.claude/projects/-Users-ben-projects-tea/1a9fc4d9-5e0e-42a7-840d-bcc7ede00426.jsonl`
-  ("White tea brewing guide", user turn 2026-10-29T21:12:46Z, desktop
-  2.1.309): the message `/research /goal <newline><newline>Research the
-  best way to brew white tea...` is stored with
-  `<command-name>/research</command-name>` and the whole `/goal ...` text
-  inside `<command-args>`; the file carries no goal indicator, verdict,
-  or "Goal cleared" line, so no goal was set. The "Sencha brewing guide"
-  transcript (`4891b4cf-...`, 2026-10-16) opens the same way in a session
-  listing's snippet and also carries no goal state.
 - Inference carried into the skill, not stated on the page: a run with a
   user gate (an approval, rounds of questions) is a poor fit because the
   evaluator starts another turn rather than waiting, and the
   no-tool-use stop then halts the loop. Mechanism-level inference from the
   quoted text; not measured.
 
-### Baseline and eval evidence for this skill (2026-10-29)
-- Harness: `ab_eval.py --mode skill --old --new`, old body (2026-08-30
-  text) against new body, 4 evals × 2 arms × 3 runs = 24 runs, $4.27;
-  Claude Code 2.1.287 on the CLI, model claude-opus-5-5[1m], builtin
-  plugins cc-plugin-agents-md, cc-plugin-plugin-authoring,
-  cc-plugin-telemetry, no user hooks, the user's rules loaded in both
-  arms; each body staged as a renamed project skill (`prompt-author-old`,
-  `prompt-author-new`) with the personal copy off. Eval set at
-  `prompt-author/evals/ab-evals.json`; summary and the mechanical check
-  script filed beside it. Grading by the author against
-  `expected_behavior`, not blind.
-- goal-fit-long-run (loaded 3/3 both arms): new 3/3 lead with `/goal`,
-  show the per-guide exit codes in the conversation, carry a 30–40-turn
-  bound, note auto mode; old 0/3 on the `/goal` discriminators. Cost new
-  $0.218±0.005, old $0.243±0.003.
-- goal-unfit-user-gates (loaded new 3/3, old 1/3): new 3/3 refuse the
-  single goal with the evaluator reason and split; old 3/3 also refuse and
-  split "from memory", but the two unloaded runs invent requirements and
-  0/3 bound the goal or ask for proof in the conversation; old 1/3 pass
-  all four behaviors.
-- goal-placement-refine: loaded 0/6 — the "fix it:" plus slash-command
-  phrasing matches the description in neither arm — so the eval measured
-  the base model: 6/6 explain the argument-text capture, lead with
-  `/goal`, and name the research skill in prose. Placement paragraph
-  desk-checked only.
-- one-turn-no-goal (loaded new 3/3, old 0/3): new 3/3 no `/goal`, at most
-  one sentence saying one turn finishes it, 28–52-word prompts; old
-  95–120-word prompts with invented requirements (Scope effect, not this
-  pass). No over-application of `/goal` observed.
 ## skill-author skill subject-matter sources
 
 Provenance for `references/skill-config.md` (added 2026-10-30) and the
 framework's config bullet. Session 4b9d2382-e133-42cd-9deb-18f9093fcab0.
 
-### skill-author — observed hardcoding (direct inspection, 2026-10-30)
-- Method: `grep -rnE '~/projects|/Users/<user>|~/\.config|uname|darwin'`
-  over `~/.claude/skills/*/SKILL.md`, this session.
-- Supports: the failure this pass fixes. Machine-specific values written
-  into skill bodies or descriptions: notes (`~/projects/ai/notes`),
-  research (`~/projects/ai/notes/INDEX.md`), tea-guide
-  (`~/projects/tea/guides/`), insights-v2 (`~/ai/insights-v2`, in
-  the description too), job-hunting, project-author (`~/projects`),
-  opnsense (`~/.config/opnsense/`); companion skills named in prose in
-  seven skills (notes, research, study-credibility, info-design). The
-  2026-10-24 injected-config design for the research skill was reverted
-  the same day as too complex for a Claude Code + Cursor + Codex pack
-  (skill-author's CHANGELOG.md at version 2.0.1, 2026-10-24 entries);
-  its open direction, a
-  per-machine config directory read by a plain instruction, is what
-  skill-config.md now specifies. Decisions taken by the user 2026-10-30 in
-  this session: no rule file carries skill config; the plain read is the
-  default and `!` injection is out; the config block is a flat key list
-  with one documenting header.
+### skill-author — config design decided by the user (2026-10-30)
+- Decisions taken by the user 2026-10-30 in this session: no rule file
+  carries skill config; the plain read is the default and `!` injection is
+  out; the config block is a flat key list with one documenting header.
 - Superseded 2026-10-31 by a grilling session (same session id) that
   settled the design the user confirmed: keys declared in a `## Config`
   table in SKILL.md; values in `config.local.yaml` beside it, ignored by a
@@ -2087,49 +1835,12 @@ framework's config bullet. Session 4b9d2382-e133-42cd-9deb-18f9093fcab0.
   and the export skills deferred. Verified targets Claude Code, Cursor,
   Codex; best effort Gemini CLI, Copilot, Antigravity; macOS and Windows.
 
-### skill-author — baseline and eval evidence (2026-10-31)
-- Method: the shared scripts on Claude Code 2.1.287, claude-opus-5-5[1m],
-  plugins cc-plugin-agents-md, cc-plugin-plugin-authoring,
-  cc-plugin-telemetry; eval sets and results under
-  `skill-author/evals/config-2026-10-30/` (queries, A/B set, the old
-  version, and `results-2026-10-31/`).
-- Supports: trigger eval 16 queries × 3 runs, 16/16, 1.00 should-trigger,
-  0.00 near-miss, $0.62. A/B old-vs-new 3 × 3 × 2, $8.20, artifact
-  loaded 17/18: the new skill-author produced the `## Config` table, the
-  read instruction, and the ignore file in 6 of 6 configured drafts and
-  no config in 3 of 3 drafts where nothing varied; the old produced none
-  of the convention and hardcoded the fixture path 3 of 3; on the
-  companion-skill prompt the old arm improvised three different config
-  shapes in three runs. Cost per run at parity. Single-model,
-  single-version evidence.
-
-### skill-author and rule-author — eval evidence, kind pass (2026-10-31, Opus)
-- Method: the shared scripts with `--model opus` on Claude Code 2.1.287,
-  claude-opus-5-5; results under `skill-author/evals/config-2026-10-30/
-  results-2026-10-31-kind/` and `rule-author/evals/portable-2026-10-31/
-  results/`.
-- Supports: skill-author old-vs-new 3 × 3 × 2, $9.05, 18/18 loaded: the
-  kind-aware version keeps the config behavior (6/6 configured drafts
-  with table, ignore, and `harness: portable`; 3/3 no-config drafts) at
-  +6% to +35% cost per run. rule-author trigger 14/16 (0.79 / 0.00,
-  $0.50; two inline answers, one an eval-set collision with the installed
-  STE rule); rule-author A/B against the August index version, $3.48:
-  harness-reference reads 3/3 and budget and contradiction checks 2/3 in
-  the new arm against 0/3 in the old; the diagnosis prompt loaded the
-  renamed scratch copies in only 3 of 6 runs. Single-model,
-  single-version evidence.
-
-### Config file format facts (direct inspection, 2026-10-31)
-- Method: import checks and sample parses on this machine's two
-  interpreters, `/usr/bin/python3` 3.9.6 and `/opt/homebrew/bin/python3.14`
-  3.14.8.
-- Supports: PyYAML is installed in neither; `tomllib` exists in 3.14 only
-  and reads but never writes; `configparser` and `json` exist in both; JSON
-  allows no comments. INI was proposed and rejected by the user as dated;
-  with no script in the design the choice fell to readability and honesty,
-  and a flat `key: value` file is valid YAML, the syntax every skill's
-  frontmatter already uses. Author rule recorded in skill-config.md: quote
-  a value that contains `: ` or `#`.
+### Config file format (2026-10-31)
+- Supports: INI was proposed and rejected by the user as dated; with no
+  script in the design the choice fell to readability and honesty, and a
+  flat `key: value` file is valid YAML, the syntax every skill's
+  frontmatter already uses. JSON allows no comments. Author rule recorded
+  in skill-config.md: quote a value that contains `: ` or `#`.
 
 ### Antigravity documentation (skills, rules, sandbox, permissions)
 - URLs: https://antigravity.google/docs/skills ;

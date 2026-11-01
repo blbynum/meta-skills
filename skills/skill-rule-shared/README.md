@@ -1,7 +1,7 @@
 # skill-rule-shared
 
-Not a skill. This directory has no `SKILL.md`, so Claude Code ignores it
-(probed on 2.1.220: no roster entry, no warning). It holds the files that the two
+Not a skill. This directory has no `SKILL.md`, so Claude Code ignores it.
+It holds the files that the two
 authoring skills, one for skills and one for rules, share, so that each
 stays pointed at one artifact kind while the record-keeping stays in one
 place:

@@ -39,13 +39,12 @@ in use, real past transcripts are the best eval set available: the queries
 carry the texture above, and the old outputs are measured baselines that no
 synthetic eval provides. Read them first whenever the artifact has history.
 
-Two traps, both hit on 2026-08-17 and each of which voided an eval:
+Two traps, each of which voids an eval:
 
 - Do not reuse an eval query as a worked example inside the artifact. The
   with-arm is then testing on training data, and the result says nothing.
-  The fixture's own identifiers count too: on 2026-10-28 a draft skill's
-  reference file used the eval fixture's flag, key, and function names as
-  its style examples, which would have handed the with-arm the fixture's
+  The fixture's own identifiers count too: a flag, key, or function name
+  from the fixture used as an example hands the with-arm the fixture's
   facts. Grep the artifact for the fixture's names before a suite.
 - `ab_eval.py --mode rule` gives the model no slash-command framing. An eval
   query that only makes sense as a skill invocation ("refine this prompt")
@@ -78,11 +77,11 @@ share vocabulary with the skill but need something else. Obvious negatives
 ("write a fibonacci function" against a PDF skill) measure nothing. The
 useful negative is the one you have to think about.
 
-A third trap, hit 2026-08-22: a should-trigger query that references
-attached material ("look at these three ads and tell me...") measures
-nothing in this text-only harness, because nothing is attached — the model
-correctly asks for the material before loading any skill, and the query
-scores 0.00 for a behavior that is right. Phrase trigger queries so the
+A third trap: a should-trigger query that refers to attached material
+("look at these three ads and tell me...") measures nothing in this
+text-only harness, because nothing is attached — the model can correctly
+ask for the material before it loads any skill, and the query then scores
+0.00 for a behavior that is right. Phrase trigger queries so the
 observable activity is in the prompt text itself, or pass real files via
 the eval's `files` field.
 
@@ -124,9 +123,7 @@ How the arms are built matters for what the result means:
   (`--disallowed-tools "Skill(<name>)"` plus a `skillOverrides` setting),
   so every other skill, rule, and hook stays loaded in both arms and the
   comparison isolates one artifact. The script checks that the with-arm
-  actually loaded the skill and reports a run where it did not. An older
-  version disabled all skills in the baseline, which measured "everything
-  versus nothing".
+  actually loaded the skill and reports a run where it did not.
 - `--mode rule` starts both arms from `--safe-mode`, which loads no CLAUDE.md,
   skills, or hooks, and injects the rule text into the with arm through
   `--append-system-prompt`, with the frontmatter and HTML comments stripped
@@ -136,16 +133,12 @@ How the arms are built matters for what the result means:
   competes with other loaded rules will look better here than in practice.
 - A rule that governs a tool the eval harness does not have cannot be
   measured this way at all. Both `--mode rule` arms run as `claude -p
-  --safe-mode`, and that session carries only the CLI tools: on 2026-08-22
-  (Claude Code 2.1.220, claude-opus-5) the `init` event listed Bash, Read,
-  Write, Edit, NotebookEdit, WebSearch, WebFetch, Skill, Task and the
-  Cron/Task/Worktree family — no `Artifact`, no `SendUserFile`, no MCP
-  tools. A rule about publishing, uploading, the browser, or any other
-  desktop-only or MCP-only surface therefore has nothing to change in
-  either arm, and the run measures noise. Read the tool list before you
-  write the eval set — `claude -p --safe-mode --output-format stream-json
-  --verbose "say hi"` prints it in the `init` event — and when the governed
-  tool is absent, desk-check instead and record the skip with that reason.
+  --safe-mode`. Read that session's tool list before you write the eval
+  set — `claude -p --safe-mode --output-format stream-json --verbose "say
+  hi"` prints it in the `init` event. If the governed tool is absent (for
+  example a desktop-only or MCP-only tool), the rule has nothing to change
+  in either arm and the run measures noise: desk-check instead and record
+  the skip with that reason.
 - `--old` / `--new` compares two versions of the same artifact in the same
   arms; use it when the question is "did the edit help", not "does the
   artifact help".
@@ -155,8 +148,8 @@ directory is contained. Work that writes to an absolute path is not: an
 artifact that saves into a real vault, repository, or config directory will
 write there for every run in both arms. Check what the artifact writes before
 you launch a suite, and point it at a scratch copy if it writes outside the
-working directory. Two mechanics that help (both from the 2026-08-27
-job-hunting pass): a directory listed in an eval's `files` is copied
+working directory. Two mechanics of the script help: a directory listed
+in an eval's `files` is copied
 recursively into the run dir under its own name (so a query about "this
 project" must name that directory, for example `./logsift`, or the model
 works in the empty run root), so a nested fixture tree
@@ -175,102 +168,59 @@ a skill; the runtime reads it at startup and removes the tool. Before you
 launch any suite, ask what the loaded skill will try to do in its first
 turns and which of those actions `dontAsk` does not stop.
 
-Three more hazards, all hit on 2026-08-19 while evaluating a web-research
-skill:
+More hazards to check before you trust a run:
 
 - A skill's reference files live in its own directory, outside the
-  throwaway run directory, so every `Read` of them prompts for permission
-  and the non-interactive run denies it: the with-arm ran on SKILL.md
-  alone while reporting "I could not open the skill's reference". Since
-  that day `ab_eval.py --mode skill` pre-allows
-  `Read(//<abs skill dir>/**)` in both arms; before it, every A/B of a
-  skill with references measured the body without them. Check the
-  transcripts for "requested permissions to read" before you trust an
-  older result.
-
-- A skill with `allowed-tools` in its frontmatter cannot load by model
-  invocation in `claude -p` under `acceptEdits` on Claude Code 2.1.220 and
-  2.1.287 (re-measured 2026-10-24, 3 of 3 stream-json runs): the Skill call
-  returns `Execute skill: <name>` as an error and the with-arm silently
-  becomes a baseline run. The `artifact_loaded` check catches it only if
-  you read it; the model's own output said "the skill failed to load", or
-  on 2.1.287 sometimes claimed success. Strip the field before measuring,
-  or measure with it and read the flag. A user-typed `/name` prompt is not
-  blocked by the field, so a `-p "/name ..."` run measures the body while
-  a prose prompt measures only the trigger.
-- A skill whose body injects shell output (`` !`command` ``) aborts the
-  whole invocation when the command matches no allow rule, and in `-p` the
-  abort is invisible: the run prints nothing, `--output-format json` shows
-  `"num_turns":0` and an empty `result` with `is_error` false (2026-10-24,
-  2.1.287, 4 of 4 user-invoked runs). Treat a zero-turn, empty-result run
-  as this failure, not as a model that chose silence; pre-approve the
-  injected script with `allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/x.sh
-  *)` or pass the same rule with `--allowed-tools`.
+  throwaway run directory, so a `Read` of them needs a permission that a
+  non-interactive run denies. `ab_eval.py --mode skill` pre-allows
+  `Read(//<abs skill dir>/**)` in both arms for that reason. When the
+  artifact reads files anywhere else, check the transcripts for
+  "requested permissions to read".
+- A with-arm run where the skill did not load is a baseline run, whatever
+  the model's output says. Read the `artifact_loaded` flag and the Skill
+  call's result in the transcript; a Skill call that returned an error
+  did not load the skill.
+- A run with zero turns and an empty result is a failed invocation, not a
+  model that chose silence. Find the cause before you grade — one cause to
+  check is an injected shell command (`` !`command` ``) that matched no
+  allow rule.
 - Web tools and Bash prompt for permission, so a non-interactive run
   denies them. Pass `--allowed-tools WebSearch WebFetch "Bash(curl *)"`
   (and the exact script the skill runs) to `ab_eval.py` so both arms can
-  do the task; `--effort` sets the effort level. Both flags were added to
-  the scripts that day.
-
-- PDF fixtures fail nondeterministically on a machine without poppler
-  (hit 2026-08-27: 3 of 21 runs in one suite, one skill pass). The
-  CLI's Read falls back to `pdftoppm` for PDF rendering; with it absent,
-  some runs recover the text another way and others cannot read the
-  fixture at all — those runs then measure refusal behavior instead of
-  the task. Before a suite with PDF fixtures, check `pdftoppm` exists
-  (`brew install poppler`) or convert the fixture to text. The failed
-  runs are detectable in outputs as "could not read the PDF" and must be
-  excluded from grading, not counted against either arm.
+  do the task; `--effort` sets the effort level.
+- Before a suite with file fixtures, confirm that one run can read each
+  fixture (a PDF may need `pdftoppm`, from poppler), or convert the
+  fixture to text. Exclude from grading any run that could not read a
+  fixture; do not count it against either arm.
 
 Read the transcripts, not only the outputs. The pass rate says whether the
 run ended well; the transcript says how, and that is where the fixable
 problems are — a script reinvented in every run belongs in `scripts/`, a
 detour repeated in every run means the text sends the model the wrong way.
 
-## Two preflight checks (added 2026-10-13)
+## Preflight checks
 
-Both scripts failed before any run on 2026-10-13, for reasons that have
-nothing to do with the artifact under test:
+Each of these can fail every run in a suite for a reason that has nothing
+to do with the artifact under test:
 
 - **Python version.** The scripts use `str | None` annotations, which need
-  Python 3.10 or later. On this Mac `python3` is the system 3.9.6, which
-  raises `TypeError: unsupported operand type(s) for |` at import. Run them
-  with `/opt/homebrew/bin/python3.14` (or any 3.10+), or put Homebrew's bin
-  first on `PATH`.
-- **Login state.** `claude -p` with an expired or absent login returns a
-  `result` event with `is_error: true`, `total_cost_usd: 0`, and the text
-  `Failed to authenticate` in about one second. Seven launched runs looked
-  finished and were all invalid. Run `claude auth status` first and expect
-  `"loggedIn": true`. The desktop app's embedded binary
-  (`$CLAUDE_CODE_EXECPATH`) reports logged out when run outside the app, so
-  it is not a substitute; log the terminal CLI in with `claude auth login`.
-  (2026-10-30: `claude auth status` reported `loggedIn: true` on a refresh
-  token that the first `-p` run could not refresh; 18 launched runs failed
-  with `Failed to authenticate: OAuth session expired and could not be
-  refreshed`, and the status then read `false`. The status checks the
-  stored credential, not the refresh, so also run a one-word `claude -p`
-  and expect a non-zero `total_cost_usd` before a suite.)
-
-- **Run directory under `~/.claude`.** (added 2026-10-14) Claude Code
-  treats files under `~/.claude` as sensitive and denies edits there in a
-  non-interactive run. An `--out` inside a skill's own `evals/` directory
-  therefore makes every file-writing eval measure permission denials: on
-  2026-10-13 all fifteen with-arm runs of a README-writing skill ended with
-  "requested permissions to edit ... which is a sensitive file" and wrote
-  their output to the session scratchpad instead. Put `--out` outside
-  `~/.claude` (the session scratchpad works) and copy `summary.md` back.
-- **Slash-command queries.** (added 2026-10-14) In `--mode skill`, a query
-  that begins with `/<skill>` gives the baseline arm nothing to run: the
-  skill is disabled there, so the session exits at $0 and zero turns. The
-  with-arm loads the body by slash expansion, which the `artifact_loaded`
-  detector cannot see, so it reports "did not load" for runs that did.
-  Phrase skill-mode queries as prose that the description should catch, and
-  let the trigger eval tell you whether it does.
-- **Artifacts that write to a fixed absolute path.** (restated 2026-10-14)
-  A skill whose default target is a real directory (`~/projects/<name>`)
-  reaches for it from a scratch run directory. The non-interactive run
-  denied those writes this time, but check `ls` on the real target after a
-  suite, and phrase the eval so the working directory is the target.
+  Python 3.10 or later; an older `python3` fails at import. Run them with
+  Python 3.10 or later.
+- **Login state.** A run that fails to authenticate can look finished.
+  Before a suite, run a one-word `claude -p` and expect a non-zero
+  `total_cost_usd`. If it fails, sign in to the terminal CLI with
+  `claude auth login`.
+- **Slash-command queries.** In `--mode skill`, a query that begins with
+  `/<skill>` gives the baseline arm nothing to run, because the skill is
+  disabled there. The with-arm loads the body by slash expansion, which
+  the `artifact_loaded` detector cannot see, so it reports "did not load"
+  for runs that did. Phrase skill-mode queries as prose that the
+  description should catch, and let the trigger eval tell you whether it
+  does.
+- **Artifacts that write to a fixed absolute path.** A skill whose default
+  target is a real directory (`~/projects/<name>`) reaches for it from a
+  scratch run directory. Check `ls` on the real target after a suite, and
+  phrase the eval so the working directory is the target.
 
 ## Confounds to record with every run
 
@@ -279,12 +229,12 @@ scripts write these into every result file; check them before you compare
 runs from different days:
 
 - **Claude Code version.** The scripts call the `claude` on `PATH`, which
-  can lag the desktop app by several releases (2.1.220 against 2.1.227–229
-  in August 2026). Results carry `claude --version`; a comparison across
-  versions is a comparison across two harnesses.
-- **Resolved model.** `--model` unset means the account default, which
-  changed between passes (Sonnet 5 on one day, Opus 5 on the next). Results
-  carry the model the `init` event reports, not the string "default".
+  can lag the desktop app by several releases. Results carry `claude
+  --version`; a comparison across versions is a comparison across two
+  harnesses.
+- **Resolved model.** `--model` unset means the account default, which can
+  change between passes. Results carry the model the `init` event reports,
+  not the string "default".
 - **Injected context.** Every `claude -p` session outside `--safe-mode`
   loads the user's rules, skills, and plugin hooks. A SessionStart hook can
   inject text that changes the behavior under test — for example a plugin
@@ -294,8 +244,8 @@ runs from different days:
   `~/.claude/plugins/`) and record them; if one pushes on the behavior you
   are measuring, disable it for the run or state that the rate is
   conditioned on it.
-- **Skill roster.** `claude -p` on the CLI does not load the desktop app's
-  bundled plugin skills, so a trigger eval cannot see a competitor that only
+- **Skill roster.** The skills `claude -p` loads on the CLI can differ from
+  the desktop app's, so a trigger eval may not see a competitor that only
   exists there. Name the roster the eval ran against.
 
 ## Reading the results
