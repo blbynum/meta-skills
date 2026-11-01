@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "skill": "ai-retrospective",
+    "model_requested": "opus",
+    "effort_requested": "default",
+    "model": "claude-opus-5-5",
+    "claude_code_version": "2.1.287",
+    "plugins_loaded": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-telemetry@builtin"
+    ],
+    "skill_listed_in_roster": true,
+    "runs_per_query": 3,
+    "passed": 14,
+    "total": 14,
+    "recall": 0.9583333333333334,
+    "false_positive_rate": 0,
+    "total_cost_usd": 0.3919
+  },
+  "results": [
+    {
+      "query": "how did that go? audit how you worked this session",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.20730933333333332,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "retrospective on this session please",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21347166666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "what went wrong with how you worked on that migration, you redid the same step three times",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.22058346666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "audit this session's tool use, you ran the same grep five times and spawned a subagent for a one-file read",
+      "should_trigger": true,
+      "trigger_rate": 0.6666666666666666,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.19890746666666664,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "how could I have set this up better so you didn't need three corrections",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21305306666666665,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "what should I change in my rules after this session",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.18472626666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "run a retrospective on why the subagent stalled and what you should have done instead",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.20277560000000003,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "which of my skills actually fired in this session and which should have",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1988268,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "how should I have worded my opening prompt to get here directly?",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.19650873333333335,
+      "other_skills_invoked": [
+        "prompt-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "summarize what we did today for the team",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1543334,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "write a note about the pgbouncer fix we found",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.204819,
+      "other_skills_invoked": [
+        "notes"
+      ],
+      "pass": true
+    },
+    {
+      "query": "add a rule that you always run the tests before a commit",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1989152,
+      "other_skills_invoked": [
+        "rule-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "what patterns do you see across my last 30 sessions on this machine",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.173463,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "explain how git rebase --onto works",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.13062593333333333,
+      "other_skills_invoked": [],
+      "pass": true
+    }
+  ]
+}

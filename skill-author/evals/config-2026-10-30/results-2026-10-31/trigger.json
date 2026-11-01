@@ -1,0 +1,193 @@
+{
+  "summary": {
+    "skill": "skill-author",
+    "model_requested": "default",
+    "effort_requested": "default",
+    "model": "claude-opus-5-5[1m]",
+    "claude_code_version": "2.1.287",
+    "plugins_loaded": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-telemetry@builtin"
+    ],
+    "skill_listed_in_roster": true,
+    "runs_per_query": 3,
+    "passed": 16,
+    "total": 16,
+    "recall": 1,
+    "false_positive_rate": 0,
+    "total_cost_usd": 0.6163
+  },
+  "results": [
+    {
+      "query": "migrate the notes skill so it stops hardcoding my vault path",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2514072666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "make the research skill shareable, I want to give it to a coworker",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.24035666666666666,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "can you migrate ~/projects/foo/.claude/skills/deploy so it works on my windows laptop too",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.25405500000000003,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "make a skill for turning meeting notes into action items",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23236966666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "update the tea-guide skill, the sourcing step keeps picking vendor pages over reddit",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.22976413333333334,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "why doesn't my mermaid skill fire when I ask for a flowchart",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2500092666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "turn this into a skill so I don't have to explain it every time",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.19953766666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "test whether the doc-author skill actually helps or if I'm wasting tokens",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.22543566666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "migrate the database schema to the new orders table layout",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.15368533333333334,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "make this repo shareable with the team: readme, license, contributing guide",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.18729140000000002,
+      "other_skills_invoked": [
+        "doc-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "add a rule that we always use pnpm in this project",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2492696,
+      "other_skills_invoked": [
+        "rule-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "write a subagent that reviews PRs for security issues",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.3081413333333333,
+      "other_skills_invoked": [
+        "agent-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "move my dotfiles and shell config over to the new machine",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.16653220000000002,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "update all the rules against current best practices",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23371660000000002,
+      "other_skills_invoked": [
+        "rule-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "switch pytest to read the local .env in this project's config",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.156249,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "write a note about what we decided on config files today",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.205435,
+      "other_skills_invoked": [
+        "notes"
+      ],
+      "pass": true
+    }
+  ]
+}

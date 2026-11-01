@@ -1,0 +1,191 @@
+{
+  "summary": {
+    "skill": "rule-author",
+    "model_requested": "opus",
+    "effort_requested": "default",
+    "model": "claude-opus-5-5",
+    "claude_code_version": "2.1.287",
+    "plugins_loaded": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-telemetry@builtin"
+    ],
+    "skill_listed_in_roster": true,
+    "runs_per_query": 3,
+    "passed": 14,
+    "total": 16,
+    "recall": 0.7916666666666666,
+    "false_positive_rate": 0,
+    "total_cost_usd": 0.5018
+  },
+  "results": [
+    {
+      "query": "add a rule that we always use pnpm in this repo, never npm or yarn",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.26691193333333335,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "make it a rule that commit messages follow conventional commits",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2502993333333333,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "put this in CLAUDE.md: never run the full test suite without asking me first",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.24337599999999998,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "add to my rules: write all documentation in simplified technical english",
+      "should_trigger": true,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1200726,
+      "other_skills_invoked": [],
+      "pass": false
+    },
+    {
+      "query": "why isn't my rule about no em dashes being followed? it's right there in my rules",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23692646666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "update all the rules against current best practices",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23041193333333335,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "I want a standing constraint in every session: no force pushes, ever",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23846206666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "should 'always run prettier before committing' be a rule or a skill?",
+      "should_trigger": true,
+      "trigger_rate": 0.3333333333333333,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.16618533333333335,
+      "other_skills_invoked": [],
+      "pass": false
+    },
+    {
+      "query": "make a skill for writing release notes from merged PRs",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2417528,
+      "other_skills_invoked": [
+        "skill-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "write a subagent that reviews PRs for security issues",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.3281306666666667,
+      "other_skills_invoked": [
+        "agent-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "add a git pre-commit hook that runs the linter",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.15443553333333332,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "what are the rules for castling in chess",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.12126500000000001,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "add an eslint rule to the config that flags unused variables",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1668858666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "document our coding standards in the README",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.19895446666666666,
+      "other_skills_invoked": [
+        "doc-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "turn this deploy checklist into a skill I can run",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.22676326666666666,
+      "other_skills_invoked": [
+        "skill-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "remember that I prefer tabs over spaces",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.16725299999999999,
+      "other_skills_invoked": [],
+      "pass": true
+    }
+  ]
+}

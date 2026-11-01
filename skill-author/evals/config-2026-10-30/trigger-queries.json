@@ -1,0 +1,18 @@
+[
+  {"query": "migrate the notes skill so it stops hardcoding my vault path", "should_trigger": true},
+  {"query": "make the research skill shareable, I want to give it to a coworker", "should_trigger": true},
+  {"query": "can you migrate ~/projects/foo/.claude/skills/deploy so it works on my windows laptop too", "should_trigger": true},
+  {"query": "make a skill for turning meeting notes into action items", "should_trigger": true},
+  {"query": "update the tea-guide skill, the sourcing step keeps picking vendor pages over reddit", "should_trigger": true},
+  {"query": "why doesn't my mermaid skill fire when I ask for a flowchart", "should_trigger": true},
+  {"query": "turn this into a skill so I don't have to explain it every time", "should_trigger": true},
+  {"query": "test whether the doc-author skill actually helps or if I'm wasting tokens", "should_trigger": true},
+  {"query": "migrate the database schema to the new orders table layout", "should_trigger": false},
+  {"query": "make this repo shareable with the team: readme, license, contributing guide", "should_trigger": false},
+  {"query": "add a rule that we always use pnpm in this project", "should_trigger": false},
+  {"query": "write a subagent that reviews PRs for security issues", "should_trigger": false},
+  {"query": "move my dotfiles and shell config over to the new machine", "should_trigger": false},
+  {"query": "update all the rules against current best practices", "should_trigger": false},
+  {"query": "switch pytest to read the local .env in this project's config", "should_trigger": false},
+  {"query": "write a note about what we decided on config files today", "should_trigger": false}
+]

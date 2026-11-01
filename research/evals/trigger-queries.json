@@ -1,0 +1,72 @@
+[
+ {
+  "id": "research-the-current-state-of-local-llm",
+  "query": "research the current state of local LLM inference on apple silicon",
+  "should_trigger": true
+ },
+ {
+  "id": "look-into-whether-pgbouncer-or-pgcat-is",
+  "query": "look into whether pgbouncer or pgcat is the better pooler for us",
+  "should_trigger": true
+ },
+ {
+  "id": "dig-into-what-the-evidence-says-about-st",
+  "query": "dig into what the evidence says about standing desks and back pain",
+  "should_trigger": true
+ },
+ {
+  "id": "find-out-the-best-practice-for-rotating",
+  "query": "find out the best practice for rotating API keys in kubernetes",
+  "should_trigger": true
+ },
+ {
+  "id": "compare-tailscale-and-netbird-for-a-home",
+  "query": "compare Tailscale and Netbird for a homelab",
+  "should_trigger": true
+ },
+ {
+  "id": "is-it-true-that-intermittent-fasting-imp",
+  "query": "is it true that intermittent fasting improves insulin sensitivity",
+  "should_trigger": true
+ },
+ {
+  "id": "what-s-the-current-state-of-webgpu-suppo",
+  "query": "what's the current state of WebGPU support across browsers",
+  "should_trigger": true
+ },
+ {
+  "id": "what-does-the-evidence-say-about-code-re",
+  "query": "what does the evidence say about code review size and defect rates",
+  "should_trigger": true
+ },
+ {
+  "id": "is-this-specific-study-credible-https-do",
+  "query": "is this specific study credible? https://doi.org/10.1136/bmj.l1949",
+  "should_trigger": false
+ },
+ {
+  "id": "write-a-note-pgbouncer-needs-pool-mode-t",
+  "query": "write a note: pgbouncer needs pool_mode transaction for prisma",
+  "should_trigger": false
+ },
+ {
+  "id": "who-is-behind-the-group-running-these-ad",
+  "query": "who is behind the group running these ads",
+  "should_trigger": false
+ },
+ {
+  "id": "explain-to-me-how-tcp-slow-start-works-n",
+  "query": "explain to me how TCP slow start works, no need to look anything up",
+  "should_trigger": false
+ },
+ {
+  "id": "summarize-this-thread-for-the-team",
+  "query": "summarize this thread for the team",
+  "should_trigger": false
+ },
+ {
+  "id": "write-the-readme-for-this-repo",
+  "query": "write the README for this repo",
+  "should_trigger": false
+ }
+]

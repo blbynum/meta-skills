@@ -1,0 +1,18 @@
+[
+  {"query": "add a rule that we always use pnpm in this repo, never npm or yarn", "should_trigger": true},
+  {"query": "make it a rule that commit messages follow conventional commits", "should_trigger": true},
+  {"query": "put this in CLAUDE.md: never run the full test suite without asking me first", "should_trigger": true},
+  {"query": "add to my rules: write all documentation in simplified technical english", "should_trigger": true},
+  {"query": "why isn't my rule about no em dashes being followed? it's right there in my rules", "should_trigger": true},
+  {"query": "update all the rules against current best practices", "should_trigger": true},
+  {"query": "I want a standing constraint in every session: no force pushes, ever", "should_trigger": true},
+  {"query": "should 'always run prettier before committing' be a rule or a skill?", "should_trigger": true},
+  {"query": "make a skill for writing release notes from merged PRs", "should_trigger": false},
+  {"query": "write a subagent that reviews PRs for security issues", "should_trigger": false},
+  {"query": "add a git pre-commit hook that runs the linter", "should_trigger": false},
+  {"query": "what are the rules for castling in chess", "should_trigger": false},
+  {"query": "add an eslint rule to the config that flags unused variables", "should_trigger": false},
+  {"query": "document our coding standards in the README", "should_trigger": false},
+  {"query": "turn this deploy checklist into a skill I can run", "should_trigger": false},
+  {"query": "remember that I prefer tabs over spaces", "should_trigger": false}
+]

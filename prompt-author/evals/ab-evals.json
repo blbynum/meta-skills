@@ -1,0 +1,52 @@
+{
+  "artifact": "prompt-author",
+  "comment": "A/B eval set for prompt-author's Claude Code /goal guidance (added 2026-10-29). Queries carry the texture of the tea-project sessions that prompted the change; the skill's own examples use the /goal docs page's domains (tests, builds, queues) so no query text appears in the skill. Run old body against new body: PATH=/opt/homebrew/opt/python@3.14/libexec/bin:$PATH /opt/homebrew/bin/python3.14 ~/.claude/skills/skill-rule-shared/scripts/ab_eval.py --evals ab-evals.json --out <scratch>/eval-run --mode skill --skill prompt-author --old <scratch>/SKILL.old.md --new ~/.claude/skills/prompt-author/SKILL.md. Queries are prose (no /prompt-author prefix) because the old/new arms load renamed project copies. DISCRIMINATOR marks behaviors the old body has no text for.",
+  "evals": [
+    {
+      "id": "goal-fit-long-run",
+      "query": "write me a prompt for claude code. i want it to go through every brewing guide in ~/projects/tea/guides and make each one follow the layout in ~/projects/tea/LAYOUT.md (same section order, same headings, nothing else changed). there's a check script, scripts/check_layout.py <guide>, that exits 0 when a guide conforms. i dont want to babysit it, it should just keep going until every guide passes",
+      "files": [],
+      "expected_behavior": [
+        "DISCRIMINATOR: the delivered prompt begins with /goal and the condition is the whole prompt (no separate task message after it)",
+        "The condition states the end state as something the agent's output can show: check_layout.py exits 0 for every guide in ~/projects/tea/guides, with the results shown",
+        "The condition keeps the user's constraint that only section order and headings change",
+        "DISCRIMINATOR: the condition carries a turn or time bound, or the rationale offers one",
+        "DISCRIMINATOR: the rationale says the user types /goal themselves and that unattended turns need auto mode (or an equivalent permission note)"
+      ]
+    },
+    {
+      "id": "goal-unfit-user-gates",
+      "query": "help me write a prompt that runs /skill-author to build a tea-guide skill in ~/projects/tea. it should grill me first about what the guides need (a few rounds of questions), then show me a draft SKILL.md for approval before writing anything, then write it and run the evals. i want to run it as a /goal so it keeps going until the skill is done",
+      "files": [],
+      "expected_behavior": [
+        "DISCRIMINATOR: the delivered prompt does not lead with /goal, or the response says plainly that /goal is a poor fit because the grilling rounds and the draft approval need the user, and the goal evaluator starts another turn instead of waiting",
+        "DISCRIMINATOR: offers the split: an ordinary prompt up to the approval gate, then a /goal condition for the unattended remainder (write the skill, run the evals)",
+        "The prompt keeps every stated step: run /skill-author, grilling rounds, draft for approval, write, run evals",
+        "Does not invent requirements the user did not state (no extra deliverables beyond the skill and its evals)"
+      ]
+    },
+    {
+      "id": "goal-placement-refine",
+      "query": "this is what i typed in claude code and it never set a goal, it just ran the research skill once and stopped. fix it:\n\n/research /goal Research the best way to brew white tea. Goal: a short brewing guide at ~/projects/tea/guides/white-tea.md with water temp, leaf ratio, and steep times for western and gongfu, sourced from r/tea threads. keep going until the guide exists and every number has a source",
+      "files": [],
+      "expected_behavior": [
+        "DISCRIMINATOR: explains that only the first slash command ran: /research took '/goal ...' as its argument text, so no goal was set",
+        "DISCRIMINATOR: the rewritten prompt begins with /goal and names the research skill in prose inside the condition, not as a second slash command",
+        "The condition keeps the end state and its proof: the file exists at the given path with water temp, leaf ratio, western and gongfu steep times, each number with an r/tea source, and the agent shows that in its output",
+        "Adds no requirements the user did not state beyond a bound (turn or time clause) and the allowed bounding sentences",
+        "Does not drop the r/tea source preference or the file path"
+      ]
+    },
+    {
+      "id": "one-turn-no-goal",
+      "query": "write me a prompt asking claude code to add a Sources section at the end of ~/projects/tea/guides/sencha.md listing the three r/tea threads i used (i'll paste the links in)",
+      "files": [],
+      "expected_behavior": [
+        "The delivered prompt does not lead with /goal and does not recommend one",
+        "At most one sentence about /goal anywhere in the response, and only to say it is not needed",
+        "The prompt asks for the one edit the user named and nothing more; placeholders for the three links are acceptable",
+        "Short: the prompt is a few lines, matched to the ask"
+      ]
+    }
+  ]
+}
