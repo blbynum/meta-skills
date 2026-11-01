@@ -75,7 +75,7 @@ Copy this checklist into the response and check items off as you go:
 - [ ] 4. Draft or revise the rule; check the always-loaded budget and contradictions
 - [ ] 5a. Desk-check against 2–3 evaluation scenarios
 - [ ] 5b. Measure against a no-rule baseline (required for user-wide rules), or state the skip reason
-- [ ] 6. Record dates and changelog
+- [ ] 6. Refresh dates and write the pass record
 - [ ] 7. Self-maintenance pass on this skill and the shared files
 ```
 
@@ -92,8 +92,8 @@ type twice. Those failures are the eval set for step 5 (three is its working
 minimum) and the reason the rule exists. If nothing fails, say so and ask
 whether the rule is still wanted — every rule line taxes every session, so
 a rule has to earn its place by fixing something observed. For an update
-prompted by an observed failure, the failure is the observation; record it
-in the changelog with the session or transcript it came from.
+prompted by an observed failure, the failure is the observation; put it
+in the pass record (step 6) with the session or transcript it came from.
 
 ### 1. Classify
 
@@ -114,7 +114,7 @@ it when the pass writes or refreshes guidance that depends on model or
 platform behavior, and whenever the rule will state a load-bearing fact — a
 rate, a version, a flag, a limit, a quoted rule — which must be checked
 against its primary source before it is written. Skip it, and say which
-exemption applies in the changelog, for a feature request that adds
+exemption applies in the pass record, for a feature request that adds
 capability without touching guidance, a wording fix, or same-day reuse of
 sources already read in this pass. Trained knowledge and this skill's own
 text both go stale; the ledger exists to catch that.
@@ -207,9 +207,9 @@ on the failures step 0 recorded.
 5b is required for every user-wide rule, wherever a non-interactive runner
 exists; the harness reference says whether one does and how the shared
 script uses it. Without one, desk-check and record "not measured: no
-runner in <harness>" in the changelog. Skip it otherwise only for a
+runner in <harness>" in the pass record. Skip it otherwise only for a
 wording fix or a single-project rule, and write the skip and its reason in
-the changelog entry — an unstated skip reads as a run. Read the shared
+the pass record — an unstated skip reads as a run. Read the shared
 [evaluating.md](../skill-rule-shared/evaluating.md) for the method, the
 eval set format, and the confounds to record. Two facts hold in every
 harness:
@@ -229,11 +229,14 @@ close to call rather than reading a win into noise.
 ### 6. Record
 
 - Set or refresh the rule's last-verified comment.
-- Rules stay lean: they carry no changelog of their own. Record the pass —
-  what was checked, changed, or left as is, and the 5b result or skip — in
-  `CHANGELOG.md` in this skill's directory.
-- "Checked, no change" entries count as entries — future runs use them to
-  decide what needs re-verification.
+- Do not create a changelog file, even when the rule is not in a version
+  control repository. Write the pass record — what was checked, changed,
+  or left as is, the step 0 observation, each skipped step and its reason,
+  and the 5b result — into the report to the user, and
+  into the commit message when the change is committed. If the user wants
+  a history of the rule, recommend a version control repository for it.
+- A "checked, no change" pass still refreshes the last-verified markers —
+  future runs use those dates to decide what needs re-verification.
 - Name the check honestly. A step-5a walk-through is "desk-checked against N
   scenarios". Write "tested" or "measured" only when 5b ran, and give the
   numbers, the model, and the harness version.
@@ -244,23 +247,23 @@ Every pass ends by turning the findings on this skill itself:
 
 - If research contradicted or extended anything this skill, its standards
   file, or a shared file says, update them in the same pass, subject to the
-  same evidence bar. A change to a shared file is logged in this skill's
-  changelog and named as shared, so the next pass over the shared files sees it.
+  same evidence bar. Name a change to a shared file as shared in the pass
+  record, so the next pass over the shared files sees it.
 - A claim about model behavior — a rate, a tendency, an effect — observed
-  in this pass on one query, one session, or fewer than ten runs goes into
-  the CHANGELOG as a watch item, never into a standards file or
-  evaluating.md. Promote it only when a later pass finds it clears the
-  evidence bar (tier 1–2 support, or a measured effect across a real eval
-  set). A method trap whose mechanism is understood — an eval that measured
-  nothing because of how it was built — may go into evaluating.md at once,
-  dated.
+  in this pass on one query, one session, or fewer than ten runs goes to
+  the user in the report, labeled unconfirmed. Do not write it into a file
+  for a later pass to read: not the rule, this skill, a standards file,
+  evaluating.md, the ledger, or the commit message. It enters guidance
+  only when it clears the evidence bar (tier 1–2 support, or a measured
+  effect across a real eval set).
 - Refresh last-verified dates in the ledger that holds each source
   actually re-checked, and this skill's own `metadata.last-verified` when
   the pass verified its core sources: the harness's rule-file and
   permissions documentation named in the harness reference, and the
   prompting best-practices page. A pass that touches the shared decision
   framework re-reads the harness's skills documentation as well.
-- Log the pass in `CHANGELOG.md` in this skill's directory.
+- Include the changes to this skill and the shared files in the pass
+  record.
 
 ## Updating
 
@@ -277,6 +280,6 @@ An update is a check against evidence, not a rewrite:
    verified community adoption. Novelty alone never clears the bar.
 4. Below the bar → report "no change needed" with reasons: what was checked,
    what was found, why it didn't clear. Still refresh the last-verified
-   marker and changelog so the check is on record.
+   marker and write the pass record, so the check is on record.
 5. At or above the bar → apply the smallest change that incorporates the
    evidence, re-test (workflow step 5), and record.
