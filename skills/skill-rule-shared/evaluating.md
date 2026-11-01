@@ -21,7 +21,7 @@ Measuring costs real money and 10–30 minutes. It is required for every
 user-wide skill and every user-wide rule, and whenever a pass rewrites a
 skill description; run it also when the user disagrees with a judgment about
 whether the artifact helps. Skip it only for a wording fix or a
-single-project rule, and write the skip and its reason in the changelog — an
+single-project rule, and write the skip and its reason in the pass record — an
 unstated skip reads as a run.
 
 The two evals answer different questions, so run whichever the change

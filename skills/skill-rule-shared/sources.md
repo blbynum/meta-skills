@@ -6,9 +6,9 @@ live in this repository with them. This file lives in the shared directory
 beside the two authoring skills. Seeded 2026-08-15 from the user's research
 notes. On each research pass, refresh the "Last verified" date of any
 source actually re-checked; if a source moved or its guidance changed,
-update the skill files and log the change in the CHANGELOG.md of the skill
-that ran the pass (entries before the 2026-08-18 split are in this
-directory's CHANGELOG.md).
+update the skill files and name the change in the pass record of the skill
+that ran the pass. The skills kept per-skill changelogs until version
+2.0.1; that history is in version control.
 
 Renamed 2026-08-18, all in one day: skill-rule-creator → skill-author +
 rule-author (via skill-creator + rule-creator for a few hours);
@@ -121,8 +121,7 @@ skill's own `sources.md` otherwise.
   Skill format and structure natively. You don't need special system
   prompts or a 'writing skills' skill to get Claude to help create Skills."
   What this skill adds over that native ability is the ledger, the evidence
-  bar, the changelog, and the measurement scripts — not the SKILL.md
-  format.
+  bar, and the measurement scripts — not the SKILL.md format.
 - Contradiction recorded 2026-08-15, corrected 2026-08-18: this page's
   iteration example says Claude A "might suggest ... using stronger language
   such as 'MUST filter' instead of 'always filter'". The claim that ALL-CAPS
@@ -1278,8 +1277,9 @@ claims about its own models only.
   (`local-agent-mode-sessions/skills-plugin/<uuid>/<uuid>/...`) that must
   not be hardcoded; most of the harness would go unused; and rules — which
   cannot be trigger-tested and need an A/B mode of their own — have no
-  counterpart there. The CHANGELOG of that day recorded only "no built-in
-  runner", which was wrong; corrected 2026-08-18.
+  counterpart there. The CHANGELOG of that day (skill-rule-shared's, at
+  version 2.0.1) recorded only "no built-in runner", which was wrong;
+  corrected 2026-08-18.
 - What the in-house scripts add over the vendor harness: a rule A/B mode
   (`--mode rule`), near-miss trigger sets graded by the author, cost and
   transcript capture per run, and a stable path under this skill. What the
@@ -2049,8 +2049,6 @@ claims about its own models only.
   one sentence saying one turn finishes it, 28–52-word prompts; old
   95–120-word prompts with invented requirements (Scope effect, not this
   pass). No over-application of `/goal` observed.
-- Watch (9 runs per arm, one model): the `-old` copy loaded in 4/9
-  triggerable runs against 9/9 for `-new`, identical descriptions.
 ## skill-author skill subject-matter sources
 
 Provenance for `references/skill-config.md` (added 2026-10-30) and the
@@ -2068,7 +2066,8 @@ framework's config bullet. Session 4b9d2382-e133-42cd-9deb-18f9093fcab0.
   seven skills (notes, research, study-credibility, info-design). The
   2026-10-24 injected-config design for the research skill was reverted
   the same day as too complex for a Claude Code + Cursor + Codex pack
-  (this skill's CHANGELOG, 2026-10-24 entries); its open direction, a
+  (skill-author's CHANGELOG.md at version 2.0.1, 2026-10-24 entries);
+  its open direction, a
   per-machine config directory read by a plain instruction, is what
   skill-config.md now specifies. Decisions taken by the user 2026-10-30 in
   this session: no rule file carries skill config; the plain read is the
@@ -2102,8 +2101,7 @@ framework's config bullet. Session 4b9d2382-e133-42cd-9deb-18f9093fcab0.
   of the convention and hardcoded the fixture path 3 of 3; on the
   companion-skill prompt the old arm improvised three different config
   shapes in three runs. Cost per run at parity. Single-model,
-  single-version evidence; the watch items in skill-author's changelog
-  carry the n=3 observations.
+  single-version evidence.
 
 ### skill-author and rule-author — eval evidence, kind pass (2026-10-31, Opus)
 - Method: the shared scripts with `--model opus` on Claude Code 2.1.287,

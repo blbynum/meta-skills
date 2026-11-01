@@ -126,7 +126,7 @@ for Claude Code.
   Codex. Best effort: Gemini CLI, Copilot, Antigravity. macOS and Windows.
 - A portable skill is portable only when it passes the portability check in
   [skill-config.md](skill-config.md), with zero hits or every hit named
-  with its reason in the changelog. A pass never claims "portable" from a
+  with its reason in the pass record. A pass never claims "portable" from a
   reading of the text alone.
 - A harness-specific skill names its tools, uses its fields and syntax, and
   states the harness in `compatibility` as well when it needs that

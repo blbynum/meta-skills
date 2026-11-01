@@ -18,7 +18,6 @@ copy it into your own skills or rules repository.
 - [Portability](#portability)
 - [The provenance ledger](#the-provenance-ledger)
 - [Requirements](#requirements)
-- [Changelogs](#changelogs)
 - [Versioning](#versioning)
 
 ## Install
@@ -259,13 +258,6 @@ whichever ledger holds the skill they are working on.
   `skills/ai-retrospective/scripts/session_facts.py`.
 - The `claude` command-line tool, only for measurement in Claude Code.
 - `curl`, for the verification examples in `study-credibility`.
-
-## Changelogs
-
-Each skill keeps a dated `CHANGELOG.md` in its directory, one entry per
-pass, including "checked, no change" entries.
-`skills/skill-rule-shared/CHANGELOG.md` is the closed history of the
-single skill the two authoring skills were split from in August 2026.
 
 ## Versioning
 

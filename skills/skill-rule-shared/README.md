@@ -14,7 +14,6 @@ place:
 | `scripts/ab_eval.py` | Runs task prompts with and without an artifact (`--mode skill`, `--mode rule`, `--old/--new`). | Both skills. |
 | `skill-vs-rule.md` | The decision framework: skill or rule, decided on loading behavior. A request may need it before either skill is chosen, so it belongs to neither. | Both skills at their confirm-the-mechanism step; either skill answers a pure choice question from it. |
 | `guidance-style.md` | Prose style and deprecated patterns that apply to both artifact kinds. | Both skills at their draft step. Each skill keeps the format rules for its own kind in its own `references/`. |
-| `CHANGELOG.md` | The history of `skill-rule-creator` (2026-08-15 to 2026-08-18), the single skill these two replaced. Closed by the split. | Read only. New entries go to the changelog of the authoring skill that ran the pass; a change to a file in this directory is logged in the changelog of the skill that ran the pass. |
 | `retired/skill-rule-creator.SKILL.md` | The last `SKILL.md` of the single skill, as it stood when it was split. Kept so the working tree records what the two bodies were cut from. | Read only; not a skill (not at `<name>/SKILL.md`). |
 
 Both skills link these files from their `SKILL.md`, one level deep, by

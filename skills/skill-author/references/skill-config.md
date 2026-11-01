@@ -175,15 +175,15 @@ kind. Steps:
 7. Check: desk-check the table against the body; read `config.local.yaml`
    and confirm it holds every value that left the body (a `grep` wrapper
    that honors `.gitignore` never sees the file); for a portable skill,
-   run the portability check below and paste its result into the
-   changelog; run the trigger eval where a runner exists if the
+   run the portability check below and paste its result into the pass
+   record; run the trigger eval where a runner exists if the
    description changed; run the skill once and confirm it used a value
    from the file. Run the A/B only when step 5 rewrote behavior. When step
    1 finds nothing to move, report "no config keys", still do step 6, and
-   record in the changelog that the trigger eval and the run were skipped
+   record in the pass record that the trigger eval and the run were skipped
    because nothing changed. If step 6 changed the frontmatter or the body,
-   run the skill once to confirm it still loads. Record the pass in the
-   skill's changelog.
+   run the skill once to confirm it still loads. Write the pass record as
+   step 6 of SKILL.md says.
 
 ## The portability check
 
@@ -192,7 +192,7 @@ replace it. Search SKILL.md and every file under `references/` except the
 harness references themselves (`references/<harness-id>.md` and any
 `references/<harness-id>-*.md` companion, such as a long field table) for
 these,
-and paste the result into the changelog:
+and paste the result into the pass record:
 
 - a harness's command-line tool or its flags: `claude -p`, `claude --`,
   `codex `, `agy `
@@ -222,6 +222,6 @@ because not every grep honors it by bare name:
 Zero hits passes. A hit that is subject matter rather than dependence (a
 documentation skill that lists `AGENTS.md` among document kinds, the
 description's trigger vocabulary, this check's own text) is named in the
-changelog with that reason. Anything else is a dependence, and the skill
+pass record with that reason. Anything else is a dependence, and the skill
 is not portable until it is gone. A harness's product name in a sentence
 such as "when you run in Claude Code, read its reference" is not a hit.
