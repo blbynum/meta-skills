@@ -50,7 +50,17 @@ section and the "Versioning" section of `README.md` in agreement.
      an ancestor of `X.Y`, so no commit is lost.
 5. Never delete or move a major or minor branch. When `master` is
    pushed, push the new version branches and the deletions with it.
-6. `link.sh` has a version of its own, `LINK_SH_VERSION` near the top of
+6. In the commit that sets `VERSION`, write the version and level as the
+   first paragraph after the title: "Version 1.4.3 (snapshot)." When the
+   change merges into `master`, finish steps 3 and 4 first, and step 7 if
+   the change edits `link.sh`. Then merge with `git merge --no-ff`, and
+   give the message with two `-m` options:
+
+   ```sh
+   git merge --no-ff <branch> -m "Merge X.Y.Z: <change>" -m "X.Y.Z: <change>"
+   ```
+
+7. `link.sh` has a version of its own, `LINK_SH_VERSION` near the top of
    the script, because people copy the script alone into other
    repositories. It is independent of `VERSION` and gets no branches.
    - If a change edits `link.sh`, set `LINK_SH_VERSION` too, in the same

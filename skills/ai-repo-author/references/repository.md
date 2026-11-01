@@ -203,7 +203,11 @@ the merge did not run.
 `AGENTS.md` at the root carries the version procedure as steps for agents
 that work on the repository. `CLAUDE.md` and `GEMINI.md` each hold one
 line, `@AGENTS.md`: Claude Code and Gemini CLI read their own file names
-and import another file with `@`. Hand the template below to the rule
+and import another file with `@`. Claude Code v2.1.277 and later can
+read `AGENTS.md` directly, but by default only when no `CLAUDE.md` or
+`CLAUDE.local.md` is in or above the working directory. The import also
+works on earlier versions and beside a contributor's `CLAUDE.local.md`,
+and it never loads `AGENTS.md` twice. Hand the template below to the rule
 skill (`rule-skill`) with the repository's name and its `link.sh` case;
 it applies its own standards. When no rule skill is configured, write the
 template as it stands and say in the report that the rule checks did not

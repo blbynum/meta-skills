@@ -145,9 +145,12 @@ skill's own `sources.md` otherwise.
 
 ### Claude Code memory and rules documentation
 - URL: https://code.claude.com/docs/en/memory
-- Last verified: 2026-08-18 (re-fetched as raw markdown, `memory.md`, 462
-  lines, for the split pass; everything cited below still holds. Read on
-  this pass and not yet used by any artifact: rules files "are discovered
+- Last verified: 2026-11-01 (re-fetched as raw markdown, `memory.md`, 664
+  lines, saved and grepped, for the ai-repo-author follow-up; the AGENTS.md
+  section read in full. What that pass used is at the end of Supports.)
+- Re-fetched 2026-08-18 as raw markdown (`memory.md`, 462 lines) for the
+  split pass; everything cited below held then. Read on this pass and not
+  yet used by any artifact: rules files "are discovered
   recursively, so you can organize rules into subdirectories"; "The
   `.claude/rules/` directory supports symlinks"; path-scoped rules "are not
   re-injected automatically" after compaction; "CLAUDE.md content is
@@ -164,7 +167,7 @@ skill's own `sources.md` otherwise.
   the `/doctor` trim check states a content test the standards lack — "it
   cuts content Claude can derive from the codebase, such as directory
   layouts, dependency lists, and architecture overviews, and keeps pitfalls,
-  rationale, and conventions that differ from tool defaults".)
+  rationale, and conventions that differ from tool defaults".
 - Supports: CLAUDE.md locations and load order; under-200-lines-per-file
   guidance; `.claude/rules/` and `~/.claude/rules/` with `paths:`
   frontmatter scoping; rules-vs-skills framing (facts vs procedures); rules
@@ -172,7 +175,17 @@ skill's own `sources.md` otherwise.
   comments stripped before context injection; imports syntax; specificity
   and consistency guidance for instructions; splitting into files or
   imports reorganizes loaded context without reducing it, with
-  path-scoping and demotion to skills as the named remediations.
+  path-scoping and demotion to skills as the named remediations. Since
+  2026-11-01, also the one-line `CLAUDE.md` that imports `AGENTS.md`
+  (ai-repo-author `references/repository.md`, "The agents rule").
+  Verbatim: "Reading `AGENTS.md` directly requires Claude Code v2.1.277 or
+  later"; by default Claude reads it "only when you have no `CLAUDE.md` in
+  your working directory or above it"; and, for a `CLAUDE.md` containing
+  `@AGENTS.md`, "Keeping the import never makes Claude read `AGENTS.md`
+  twice". The same item says to remove such a `CLAUDE.md` if it holds
+  nothing else, or keep it if some sessions cannot read `AGENTS.md`
+  directly. The 2026-08-18 quote below, "Claude Code reads `CLAUDE.md`,
+  not `AGENTS.md`", is no longer on the page.
 - Re-read 2026-08-18 (byte-identical to the 2026-08-15 copy). Verbatim:
   "Size: target under 200 lines per CLAUDE.md file. Longer files consume
   more context and reduce adherence." And on AGENTS.md: "Claude Code reads
