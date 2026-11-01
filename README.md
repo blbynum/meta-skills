@@ -151,11 +151,17 @@ skills and rules of your own git repository the same way:
    ```
 
 2. Copy `link.sh` from this repository to the root of your repository.
-3. Add the line `config.local.yaml` to the `.gitignore` of your
+3. Keep the header comment at the top of `link.sh`. It holds the MIT
+   license notice, and the license requires that notice in each copy.
+4. Add the line `config.local.yaml` to the `.gitignore` of your
    repository, so that the settings of one machine stay out of commits.
    `link.sh` warns when git does not ignore that file.
-4. Commit `link.sh`. A person who clones your repository then runs
+5. Commit `link.sh`. A person who clones your repository then runs
    `./link.sh`.
+
+To compare your copy with the latest version, run `./link.sh --version`.
+Then compare the result with `LINK_SH_VERSION` in the file at the source
+URL in the header.
 
 `link.sh` links each `rules/*.md` file into the user-level rules
 directory of the harness. Codex, Cursor, and Gemini CLI have no such
@@ -175,7 +181,7 @@ about each one.
 | `skills/research/` | Desk research: finds, weighs, and synthesizes sources, with stated confidence. | `notes-skill`, `appraisal-skill` |
 | `skills/study-credibility/` | Appraises whether a study or research-backed claim is trustworthy. | none |
 | `skills/skill-rule-shared/` | Not a skill. The ledger, evaluation method, eval scripts, prose standards, and the skill-versus-rule decision framework that `skill-author` and `rule-author` share. | — |
-| `link.sh` | The link script described above. | — |
+| `link.sh` | The link script described above. It has its own version and its own copy of the license notice; see [Versioning](#versioning). | — |
 | `AGENTS.md` | Instructions for agents that work on this repository: the version procedure. `link.sh` does not link it. `CLAUDE.md` and `GEMINI.md` import it for the harnesses that do not read `AGENTS.md`. | — |
 | `VERSION` | The version of the repository; see [Versioning](#versioning). | — |
 
@@ -293,6 +299,14 @@ Each version has a branch with the version as its name:
 To use an earlier version, check out its branch in the clone, for
 example `git checkout 1.4`. The links point into the clone, so the
 harness then reads that version.
+
+`link.sh` has a version of its own, because people copy it alone into
+other repositories. `./link.sh --version` prints it. The value is
+`LINK_SH_VERSION` near the top of the script, and it is independent of
+`VERSION`. A change that edits `link.sh` sets a new script version, with
+the same three levels judged by the effect on a person who runs the
+script. The level of the change for `VERSION` is at least that level.
+The script version gets no branches.
 
 `AGENTS.md` holds the same policy as steps for agents, with the version
 check to do immediately before a merge.
