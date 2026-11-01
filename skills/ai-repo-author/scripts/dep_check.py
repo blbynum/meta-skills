@@ -30,7 +30,8 @@ relative path whose target does not exist, a link that does not resolve.
 Review items (exit 0): another skill or rule named in a body, a path under
 a home directory, CLIs, Python imports, and MCP tool names. A review item
 is a candidate, not a verdict: read the line before you act on it.
-Files skipped: evals/, sources.md, CHANGELOG.md, __pycache__, binaries.
+Files skipped: evals/, retired/, sources.md, CHANGELOG.md, __pycache__,
+binaries.
 Runs on Python 3.9 or later; stdlib only.
 """
 from __future__ import annotations
@@ -43,7 +44,7 @@ import re
 import sys
 import sysconfig
 
-SKIP_DIRS = {"evals", "__pycache__", ".git", "node_modules"}
+SKIP_DIRS = {"evals", "retired", "__pycache__", ".git", "node_modules"}
 # A directory with these names and .md files in it is a rules directory;
 # any other directory without SKILL.md is a shared directory.
 RULES_DIR_NAMES = {"rules", "instructions"}
