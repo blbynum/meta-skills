@@ -293,6 +293,10 @@ already has the repository linked into a harness sets the level:
 If more than one level fits, use the highest. A minor increase sets the
 snapshot to 0. A major increase sets the minor and the snapshot to 0.
 
+The commit that sets the version names it and its level, for example
+`Version 1.4.3 (snapshot).` The change merges into `master` with
+`git merge --no-ff`, in a merge commit titled `Merge 1.4.3: <change>`.
+
 Each version has a branch with the version as its name:
 
 - When a new version is cut, a branch named after the old version stays
