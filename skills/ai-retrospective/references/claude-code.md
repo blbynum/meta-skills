@@ -52,7 +52,8 @@ The JSONL layout is internal to Claude Code and can change between
 releases. If the ledger looks wrong — no tool calls, missing user turns, a
 record count far below the file size — suspect a format change before you
 suspect the session. Fall back to reading records directly, and fix the
-script.
+script. Before you count by any field or path this file names, confirm
+that it appears in the transcript you audit.
 
 ## Dig into a specific record
 

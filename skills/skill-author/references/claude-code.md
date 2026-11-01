@@ -9,9 +9,8 @@ skill's body; it applies to this skill's own work and to skills declared
 ## Contents
 
 - Where skills and transcripts live
-- Frontmatter extensions and measured quirks
+- Frontmatter extensions
 - Dynamic context injection
-- Writes under the configuration directory
 - Measurement: the runner and the scripts
 - Sources to re-check
 
@@ -34,7 +33,7 @@ skill's body; it applies to this skill's own work and to skills declared
   `skillOverrides` to `.claude/settings.local.json` to hide a skill without
   editing it.
 
-## Frontmatter extensions and measured quirks
+## Frontmatter extensions
 
 Claude Code reads these beyond the spec's six fields. A portable skill
 does not use them; a Claude-only skill may.
@@ -55,15 +54,11 @@ does not use them; a Claude-only skill may.
   description names a path the model could explore on its own, read the
   trigger-eval transcripts for runs that explore the path instead of
   loading the body.
-- `allowed-tools` pre-approves tools for the invoking turn, but on Claude
-  Code 2.1.220 and 2.1.287 any value makes a model-invoked Skill call a
-  permission prompt ("Execute skill: <name>"): in a non-interactive
-  `claude -p` session under `acceptEdits` the call is denied and the body
-  never loads (measured 2026-08-19 and 2026-10-24, 3 of 3 runs each; the
-  same skill loaded on every run with the field removed). A user-typed
-  `/name` is not affected (4 of 4 runs, 2026-10-24). Leave the field off a
-  skill that must load unattended and let the user's permission settings
-  govern the tools. Workspace trust does not gate the field, so review
+- `allowed-tools` pre-approves tools for the invoking turn. Before you
+  rely on it in a skill that must load unattended, run one non-interactive
+  load where the model invokes the skill. If the Skill call returns an
+  error, leave the field off and let the user's permission settings govern
+  the tools. Workspace trust does not gate the field, so review
   `allowed-tools` in skills checked into a repository before running
   there.
 - `context: fork` runs the skill in a subagent and only makes sense for a
@@ -74,31 +69,14 @@ does not use them; a Claude-only skill may.
 ## Dynamic context injection
 
 A body line `` !`command` `` runs the command before the body is sent and
-replaces the placeholder with its output. Outside auto mode an injected
-command that no allow rule matches aborts the whole invocation, silently
-in `-p` (zero turns, empty result), while `disableSkillShellExecution`
-replaces it with a placeholder and the body still loads. If a Claude-only
-skill injects, inject a bundled script,
-`` !`${CLAUDE_SKILL_DIR}/scripts/x.sh` ``, pre-approve it with
-`allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/x.sh *)`, make the script
-exit 0 on every path, and write the surrounding prose so it still reads
-correctly when the placeholder appears (measured 2026-10-24 on 2.1.287;
-works through a symlinked skill directory). `@path` references in a skill
-body do not import the file. Injection never belongs in a portable skill.
-
-## Writes under the configuration directory
-
-Claude Code treats files under `~/.claude` as sensitive: a non-interactive
-run denies edits there, and an interactive session prompts. A skill's
-offer to write `config.local.yaml` for a personal skill may therefore be
-refused, which is why the set-up wording has a print fallback, and eval
-output directories go outside `~/.claude`.
-
-Reads there are gated the same way: under `--permission-mode dontAsk` a
-read under `~/.claude` is denied unless an allow rule names the path. A
-`claude -p` smoke run of a skill whose body links to the shared directory
-needs `--allowedTools "Read(//Users/<user>/.claude/skills/skill-rule-shared/**)"`,
-the rule the A/B command already passes (2.1.287, 2026-10-31).
+replaces the placeholder with its output. If a Claude-only skill injects,
+inject a bundled script, `` !`${CLAUDE_SKILL_DIR}/scripts/x.sh` ``,
+pre-approve it with `allowed-tools: Bash(${CLAUDE_SKILL_DIR}/scripts/x.sh
+*)`, make the script exit 0 on every path, and write the surrounding prose
+so it still reads correctly when the placeholder appears. After you add an
+injected command, run the skill once with `claude -p` and confirm that the
+placeholder rendered. A run with zero turns and an empty result means the
+command was blocked. Injection never belongs in a portable skill.
 
 ## Measurement: the runner and the scripts
 
