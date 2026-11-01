@@ -3,11 +3,40 @@
 # user-level directories of an AI coding harness. The script has nothing
 # specific to one repository: copy it into any repository with the shape
 # that --help describes. Run ./link.sh --help for usage.
+#
+# Source: https://github.com/blbynum/meta-skills/blob/master/link.sh
+# Keep this header in each copy: the license requires the notice below.
+#
+# SPDX-License-Identifier: MIT
+#
+# MIT License
+#
+# Copyright (c) 2026 Ben Bynum
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 set -eu
 unset CDPATH
 : "${HOME:?HOME is not set}"
 
 PROG=${0##*/}
+# The version of this script.
+LINK_SH_VERSION=1.0.0
 HARNESS_IDS="claude-code codex cursor copilot gemini-cli antigravity"
 
 # harness ID: set H_NAME and H_SKILLS, and H_RULES (empty when the harness
@@ -91,6 +120,7 @@ Usage:
   $PROG [--harness custom] [--skills-dir <dir>] [--rules-dir <dir>]
   $PROG --list
   $PROG --help
+  $PROG --version
 
 $PROG links the skills and rules of the git repository that contains it
 into the user-level directories of an AI coding harness. Each link is a
@@ -115,6 +145,7 @@ Options:
                       no rules.
   --list              Show the harness ids and directories, then exit.
   -h, --help          Show this help, then exit.
+  --version           Show the version of $PROG, then exit.
 
   <id> is an id from the table below. <dir> is a directory path; $PROG
   makes the directory if it does not exist. The forms --harness=<id>,
@@ -198,6 +229,7 @@ INTERACTIVE=0
 while [ $# -gt 0 ]; do
   case $1 in
     -h|--help) usage; exit 0 ;;
+    --version) say "$PROG $LINK_SH_VERSION"; exit 0 ;;
     --list) list_harnesses; exit 0 ;;
     --harness|--skills-dir|--rules-dir)
       [ $# -ge 2 ] || usage_error "$1 needs a value"

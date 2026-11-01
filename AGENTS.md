@@ -50,3 +50,18 @@ section and the "Versioning" section of `README.md` in agreement.
      an ancestor of `X.Y`, so no commit is lost.
 5. Never delete or move a major or minor branch. When `master` is
    pushed, push the new version branches and the deletions with it.
+6. `link.sh` has a version of its own, `LINK_SH_VERSION` near the top of
+   the script, because people copy the script alone into other
+   repositories. It is independent of `VERSION` and gets no branches.
+   - If a change edits `link.sh`, set `LINK_SH_VERSION` too, in the same
+     `major.minor.snapshot` form. Pick the level from the change's effect
+     on a person who runs the script: major when a command that worked
+     before now fails; minor for a new option or harness; snapshot for
+     fixes and help text.
+   - The change's level for `VERSION` is at least its level for
+     `LINK_SH_VERSION`.
+   - Immediately before the merge, read `LINK_SH_VERSION` on `master`.
+     Set the branch's value to master's value plus one step at the
+     script level, as in step 3. Two branches that both change 1.0.0 to
+     1.0.1 merge with no conflict, so without this check the second
+     change gets no new version.
