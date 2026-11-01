@@ -2034,8 +2034,11 @@ grounded in entries above.
 
 ### ai-repo-author — instruction-file imports
 - Grounded in "Claude Code memory and rules documentation" (an
-  `@AGENTS.md` import in `CLAUDE.md`; re-fetched 2026-10-13) and "Gemini
-  CLI context files" (imports with `@file.md`; verified 2026-11-01).
+  `@AGENTS.md` import in `CLAUDE.md`; re-fetched 2026-11-01: "Keeping the
+  import never makes Claude read `AGENTS.md` twice", and Claude Code reads
+  `AGENTS.md` directly from v2.1.277, by default "only when you have no
+  `CLAUDE.md` in your working directory or above it") and "Gemini CLI
+  context files" (imports with `@file.md`; verified 2026-11-01).
 - Supports: the one-line `CLAUDE.md` and `GEMINI.md` in
   `references/repository.md`, "The agents rule".
 

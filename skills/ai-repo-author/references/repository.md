@@ -213,14 +213,14 @@ it applies its own standards. When no rule skill is configured, write the
 template as it stands and say in the report that the rule checks did not
 run. Keep `AGENTS.md` and the README's Versioning section in agreement.
 
-```markdown
+````markdown
 # <repo-name>: instructions for agents
 
 These instructions are for agents that work on this repository. They do
 not ship to users: keep this file at the repository root, never in
 `skills/` or `rules/`, and never link it into a harness. `CLAUDE.md` and
-`GEMINI.md` import this file for the harnesses that do not read
-`AGENTS.md`.
+`GEMINI.md` import this file for the harnesses and versions that do not
+read `AGENTS.md` directly.
 
 ## Versioning
 
@@ -264,9 +264,15 @@ section and the "Versioning" section of `README.md` in agreement.
      an ancestor of `X.Y`, so no commit is lost.
 5. Never delete or move a major or minor branch. When `master` is
    pushed, push the new version branches and the deletions with it.
-6. Write the version and level in the commit message: "Version 1.4.3
-   (snapshot)." Merge into `master` with `git merge --no-ff`, titled
-   "Merge X.Y.Z: <change>", and give the message with `-m`.
+6. In the commit that sets `VERSION`, write the version and level as the
+   first paragraph after the title: "Version 1.4.3 (snapshot)." When the
+   change merges into `master`, finish steps 3 and 4 first. Then merge
+   with `git merge --no-ff`, and give the message with two `-m` options:
+
+   ```sh
+   git merge --no-ff <branch> -m "Merge X.Y.Z: <change>" -m "X.Y.Z: <change>"
+   ```
+
 7. `link.sh` is a copy of the link script from the repository named in
    its header. It has a version of its own, `LINK_SH_VERSION` near the top
    of the script, which belongs to that source, and it gets no branches
@@ -278,7 +284,7 @@ section and the "Versioning" section of `README.md` in agreement.
      least as high as the script's own change: major when a command that
      worked before now fails; minor for a new option or harness; snapshot
      for fixes and help text.
-```
+````
 
 When the repository is itself the source of `link.sh`, step 7 instead
 says: if a change edits `link.sh`, set `LINK_SH_VERSION` too, at the
@@ -286,7 +292,8 @@ level of its effect on a person who runs the script; the change's level
 for `VERSION` is at least that level; and immediately before the merge,
 read `LINK_SH_VERSION` on `master` and set the branch's value to master's
 value plus one step, because two branches that both raise it from the
-same value merge with no conflict.
+same value merge with no conflict. Step 6 then says to finish steps 3
+and 4, and step 7 if the change edits `link.sh`, before the merge.
 
 ## Push
 
