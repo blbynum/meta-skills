@@ -138,24 +138,6 @@ point into the clone. The second step is necessary when a skill is added
 or removed: the run links the new skill and removes the link to the
 deleted one. When nothing changed, it writes `no changes`.
 
-### Upgrade from 1.x to 2.0.0
-
-Version 2.0.0 moved the skills from the repository root into `skills/`
-and changed the options of `link.sh`. After you pull 2.0.0:
-
-1. Run `./link.sh` and select your harness, or run
-   `./link.sh --harness <id>`. In 2.0.0, `./link.sh` with no arguments
-   shows the menu; it does not select Claude Code. `./link.sh <dir>`
-   becomes `./link.sh --skills-dir <dir>`.
-2. Read the output. The run replaces each old link with a link to
-   `skills/<name>`. It also moves each `config.local.yaml` from
-   `<clone>/<name>/` to `<clone>/skills/<name>/` and names the old
-   directory.
-3. Look for old skill directories at the clone root, for example
-   `<clone>/research/`. Git leaves them when they hold files that it does
-   not track. Delete each one after you check that it holds nothing you
-   need.
-
 ## Use link.sh in another repository
 
 `link.sh` contains nothing specific to this repository. To link the
