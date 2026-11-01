@@ -38,6 +38,7 @@ file held every skill's provenance.
 - Artifact subject-matter sources
 - prompt-author skill subject-matter sources
 - skill-author skill subject-matter sources
+- ai-repo-author skill subject-matter sources
 
 Every entry names the models or vintage a finding was measured on. A claim
 that drops that qualifier when it is copied into an artifact is the most
@@ -1988,3 +1989,47 @@ framework's config bullet. Session 4b9d2382-e133-42cd-9deb-18f9093fcab0.
   — seen in a WebSearch summary only, 2026-10-30.
 - At summary grade: 3,984 skills scanned on ClawHub and skills.sh, 76 with
   malicious payloads in their instructions. Not relied on by any artifact.
+
+## ai-repo-author skill subject-matter sources
+
+Provenance for the skill created 2026-11-01. Its procedure comes from the
+user's own practice, not from vendor guidance; its few harness facts are
+grounded in entries above.
+
+### ai-repo-author — the treatment, from two repository setups (2026-11-01)
+- Sources: the transcripts of the sessions that set up this repository
+  (2026-10-31 to 2026-11-01) and a second skills repository of three
+  research skills (2026-11-01), session
+  69abbd20-032e-4c0c-9880-3d4c6ea3e444 and its forks, read for step 0 of
+  the create pass; the user's request that specified the treatment. This
+  repository's `AGENTS.md` at version 2.1.0 is the reference text for the
+  agents-rule template; the step for a copied `link.sh` comes from the
+  second repository's `AGENTS.md`.
+- Last verified: 2026-11-01.
+- Supports: each failure the skill names: a README written without the
+  writing skill's README contract that carried a false claim; `link.sh`
+  copied from a working tree that predated the license notice; changelog
+  entries appended after the changelogs were removed; scripts that crashed
+  under the system Python 3.9 on `dict | None` annotations; a usage line
+  written from memory without the data-path argument; contract examples
+  that were real records; eval prompts that named real organizations; a
+  scan whose directory list zsh did not split, so it read no file and
+  reported nothing; a config key that held a value that differs by
+  harness; a portable claim made before the portability check existed; a
+  first commit under the account name because git had no user name set;
+  `git merge -F -` failing with "could not read file '-'".
+
+### ai-repo-author — instruction-file imports
+- Grounded in "Claude Code memory and rules documentation" (an
+  `@AGENTS.md` import in `CLAUDE.md`; re-fetched 2026-10-13) and "Gemini
+  CLI context files" (imports with `@file.md`; verified 2026-11-01).
+- Supports: the one-line `CLAUDE.md` and `GEMINI.md` in
+  `references/repository.md`, "The agents rule".
+
+### ai-repo-author — link.sh 1.0.0 interface
+- Source: `./link.sh --help` and `--list`, and two runs from a scratch home
+  directory, 2026-11-01 (link.sh 1.0.0, this repository at 2.1.0).
+- Supports: the repository shape; that the script links only from inside
+  a git repository; `--harness`; the second run printing `no changes`; the
+  MIT notice in the header, from which the skill builds `LICENSE` (the
+  result matched this repository's `LICENSE` byte for byte).

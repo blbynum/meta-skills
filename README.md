@@ -1,8 +1,9 @@
 # meta-skills
 
-Six Agent Skills for working on an AI harness's own configuration — the
-skills, rules, prompts, and sessions — plus the shared directory the two
-authoring skills read. Each skill is a directory in `skills/` with a
+Seven Agent Skills for working on an AI harness's own configuration — the
+skills, rules, prompts, and sessions, and the repositories that hold
+skills and rules — plus the shared directory the two authoring skills
+read. Each skill is a directory in `skills/` with a
 `SKILL.md` under the [Agent Skills standard](https://agentskills.io/).
 The repository is not installed into a harness; `link.sh` links it into
 one. `link.sh` works for any repository with the same shape, so you can
@@ -51,6 +52,7 @@ copy it into your own skills or rules repository.
    Number (0-6): 1
    Harness:    Claude Code (claude-code)
    Skills:     /Users/you/.claude/skills
+     linked ai-repo-author
      linked ai-retrospective
      linked prompt-author
      linked research
@@ -159,6 +161,10 @@ skills and rules of your own git repository the same way:
 5. Commit `link.sh`. A person who clones your repository then runs
    `./link.sh`.
 
+The `ai-repo-author` skill does these steps, and the rest of the setup
+of such a repository: dependencies, data, personal data, versioning, the
+README, and the license.
+
 To compare your copy with the latest version, run `./link.sh --version`.
 Then compare the result with `LINK_SH_VERSION` in the file at the source
 URL in the header.
@@ -180,6 +186,7 @@ about each one.
 | `skills/ai-retrospective/` | Audits how the agent worked in one session from its raw transcript, then proposes changes. | `prompt-skill`, `rule-skill`, `skills-skill`, `settings-skill` |
 | `skills/research/` | Desk research: finds, weighs, and synthesizes sources, with stated confidence. | `notes-skill`, `appraisal-skill` |
 | `skills/study-credibility/` | Appraises whether a study or research-backed claim is trustworthy. | none |
+| `skills/ai-repo-author/` | Turns skills and rules into a git repository that people link into a harness, or audits an existing one: dependencies, data, personal data, migration, `link.sh`, versioning, README, and license. | `link-script-source` (required), `license-holder` (required), `migrate-skill`, `rule-skill`, `doc-skill` |
 | `skills/skill-rule-shared/` | Not a skill. The ledger, evaluation method, eval scripts, prose standards, and the skill-versus-rule decision framework that `skill-author` and `rule-author` share. | — |
 | `link.sh` | The link script described above. It has its own version and its own copy of the license notice; see [Versioning](#versioning). | — |
 | `AGENTS.md` | Instructions for agents that work on this repository: the version procedure. `link.sh` does not link it. `CLAUDE.md` and `GEMINI.md` import it for the harnesses that do not read `AGENTS.md`. | — |
@@ -214,13 +221,13 @@ example, `research` names a `notes` skill that lives elsewhere.
 
 ## Portability
 
-Each `SKILL.md` declares its kind in `metadata.harness`. All six skills
+Each `SKILL.md` declares its kind in `metadata.harness`. All seven skills
 here are `portable`: the body uses only the fields the Agent Skills
 standard defines, names actions rather than one harness's tools, refers to
 its own files by paths relative to the skill root, and keeps every
 harness-specific fact in `references/<harness-id>.md`. Five skills have a
-`references/claude-code.md`; `study-credibility` has no harness-specific
-step and needs none. `rule-author` also has references for Cursor, Codex,
+`references/claude-code.md`; `study-credibility` and `ai-repo-author` have
+no harness-specific step and need none. `rule-author` also has references for Cursor, Codex,
 Copilot, Antigravity, and Gemini CLI, because rule files differ per
 harness.
 
@@ -232,7 +239,9 @@ What that claim rests on, as of 2026-10-31:
 - The layout matches what the Cursor and Codex documentation describe,
   as read on 2026-10-25.
 - The skills have run in Claude Code. No run in another harness has
-  happened yet.
+  happened yet. `ai-repo-author`, added 2026-11-01, has loaded in Claude
+  Code trigger evals, and its scripts have run on test fixtures and on
+  this repository; it has not yet built a repository.
 
 Two limits. The measurement step of `skill-author` and `rule-author`
 (trigger evals and A/B evals) uses the shared scripts, which drive Claude
@@ -248,7 +257,7 @@ The skills carry no citations. Provenance lives in
 `skills/skill-rule-shared/sources.md`: every source behind the authoring
 guidance (skill and rule best practices, the Agent Skills specification,
 harness documentation, prompting guidance, research papers) and the
-subject-matter sources of the six skills here, each with the date it was
+subject-matter sources of the seven skills here, each with the date it was
 last verified and the models or vintage a finding was measured on.
 
 A skill outside this repository keeps its own `sources.md` in its
@@ -262,6 +271,7 @@ whichever ledger holds the skill they are working on.
 - Python 3.10 or later, for the eval scripts in
   `skills/skill-rule-shared/scripts/` and for
   `skills/ai-retrospective/scripts/session_facts.py`.
+- Python 3.9 or later, for the scripts in `skills/ai-repo-author/scripts/`.
 - The `claude` command-line tool, only for measurement in Claude Code.
 - `curl`, for the verification examples in `study-credibility`.
 

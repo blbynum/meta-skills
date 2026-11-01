@@ -1,0 +1,275 @@
+{
+  "summary": {
+    "skill": "ai-repo-author",
+    "model_requested": "default",
+    "effort_requested": "default",
+    "model": "claude-opus-5-5[1m]",
+    "claude_code_version": "2.1.287",
+    "plugins_loaded": [
+      "cc-plugin-agents-md@builtin",
+      "cc-plugin-plugin-authoring@builtin",
+      "cc-plugin-telemetry@builtin"
+    ],
+    "skill_listed_in_roster": true,
+    "runs_per_query": 3,
+    "passed": 24,
+    "total": 24,
+    "recall": 1,
+    "false_positive_rate": 0,
+    "total_cost_usd": 0.7103
+  },
+  "results": [
+    {
+      "query": "move my tea-guide and project-author skills out of ~/.claude/skills into a git repo at ~/src/home-skills, same setup as meta-skills",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21347046666666666,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "I want to share my homelab skills with a friend. can you turn them into a repo they can clone and link into their own claude?",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21601626666666668,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "make a repo out of the opnsense and homeassistant skills, with versioning and a readme",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21204299999999998,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "set up a skills repository for my writing rules (ste100, scope-discipline) so i can use them on my work laptop too",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21400399999999997,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "~/agent-stuff has a bunch of skills i wrote, it's not in git yet. make it a proper repo i can publish on github",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21453293333333334,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "is my ~/src/team-skills repo ready to publish? check it for personal info, versioning, license and the link script",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2235012,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "package the mermaid and dataviz skills as their own git repo like we did with sleuth-skills",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21634893333333333,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "create a new skills repo for persona-author and agent-author and link it into codex",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.21233753333333333,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "put my rules folder under git with a link script and an AGENTS.md that explains our versioning",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.211668,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "my skills repo at ~/src/ops-skills has no VERSION, no license, and the readme is stale. bring it up to the standard of meta-skills",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.220812,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "make a skill that writes brewing guides for different teas",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.16855546666666665,
+      "other_skills_invoked": [
+        "skill-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "migrate the notes skill so its vault path is config and it runs on another machine",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.22950006666666667,
+      "other_skills_invoked": [
+        "skill-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "add a rule that says always use uv instead of pip for python",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.24066046666666668,
+      "other_skills_invoked": [
+        "rule-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "write a README for this python project, it's a cli that syncs photos to b2",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2036292,
+      "other_skills_invoked": [
+        "doc-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "set up semantic versioning and release branches for my rust crate",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1476576,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "create a git repo for my dotfiles with an install script that symlinks them into my home dir",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23241406666666667,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "the research skill keeps triggering on simple factual questions, fix its description",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.2377868,
+      "other_skills_invoked": [
+        "skill-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "make the prompt-author skill shareable so it works in cursor too",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.229057,
+      "other_skills_invoked": [
+        "skill-author"
+      ],
+      "pass": true
+    },
+    {
+      "query": "scan this repo for leaked api keys and tokens before i push it",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.15034313333333332,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "add windsurf as a harness option to link.sh in meta-skills",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1602642,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "get my research-ish skills into their own repo with a license, i want to put them on codeberg",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.223553,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "take the five skills i made for the job hunt and turn them into something my partner can install on her laptop",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23199173333333334,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "copy my agent rules into a github repo so the rest of the team can link them",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23338199999999998,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "a coworker sent me a folder of skills, it's in ~/Downloads/shared-skills. set it up as a repo with the link script and versioning",
+      "should_trigger": true,
+      "trigger_rate": 1,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.23675853333333335,
+      "other_skills_invoked": [],
+      "pass": true
+    }
+  ]
+}
