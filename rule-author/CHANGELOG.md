@@ -510,3 +510,29 @@ step 2.5 and step 7 name "the ledger that holds each source".
 `compatibility` added. This skill now lives in the meta-skills
 repository and is symlinked into `~/.claude/skills`. Two `/Users/ben`
 paths in this changelog became `~` and `<user>`.
+
+## 2026-11-01 — meta-skills AGENTS.md (versioning rule) — created
+
+A project rule for agents that work on this repository: the `VERSION`
+file, the bump levels, the version check before a merge, and the version
+branches. It lives in the root `AGENTS.md`, outside `skills/` and
+`rules/`, so the link script never links it. `CLAUDE.md` and `GEMINI.md`
+hold only `@AGENTS.md`: Claude Code reads `AGENTS.md` only when no
+`CLAUDE.md` is in or above the working directory, and Gemini CLI reads
+`GEMINI.md` by default. Codex, Cursor, Copilot, and Antigravity read
+`AGENTS.md` directly.
+
+Step 0: the convention is new, so no session could follow it before; the
+observation is that no file stated it. Step 2: fetched the Gemini CLI
+context-file page for the first time; `references/gemini-cli.md` filled in
+and its ledger entry upgraded from search-summary grade (shared). Budget:
+52 lines, 2.7 KB; in Claude Code it adds to the 205 user-level lines for
+sessions in this repository only. Contradictions: scope-discipline (the
+version bump is part of every change here, not added scope) and the
+harness's ask-before-push default (the rule pushes branches only when
+`master` is pushed). Desk-checked against 4 scenarios: a snapshot race
+(1.0.4 on both sides → 1.0.5), a branch at 1.0.5 after `master` moved to
+1.1.0 (→ 1.1.1, which the plain "snapshot ≤ target" test misses), a new
+skill (minor, branch `1.0` created, `1.0.x` deleted), and a helper branch
+merged into a change branch (no version). 5b skipped: single-project
+rule, and no runner covers the six harnesses.

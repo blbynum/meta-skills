@@ -15,6 +15,7 @@ not installed into a harness; it is linked into one with `link.sh`.
 - [The provenance ledger](#the-provenance-ledger)
 - [Requirements](#requirements)
 - [Changelogs](#changelogs)
+- [Versioning](#versioning)
 
 ## Install
 
@@ -165,3 +166,41 @@ Each skill keeps a dated `CHANGELOG.md` in its directory, one entry per
 pass, including "checked, no change" entries. `skill-rule-shared/CHANGELOG.md`
 is the closed history of the single skill the two authoring skills were
 split from in August 2026.
+
+## Versioning
+
+The file `VERSION` holds the version of the repository as
+`major.minor.snapshot`. `master` is the development branch.
+
+Every change that merges into `master` gets a new version. Most changes
+increase the snapshot number. The effect of the change on a person who
+already has the repository linked into a harness sets the level:
+
+| Level | The change | Examples |
+|---|---|---|
+| Major | breaks the install, or needs more than `git pull` and a new run of the link script | a skill or rule removed or renamed; a config key removed, renamed, or made required; a link script command that worked before now fails |
+| Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key; a new link script option; a skill that does a new kind of task |
+| Snapshot | all other changes | guidance edits, fixes, references, evals, documentation |
+
+If more than one level fits, use the highest. A minor increase sets the
+snapshot to 0. A major increase sets the minor and the snapshot to 0.
+
+Each version has a branch with the version as its name:
+
+- When a new version is cut, a branch named after the old version stays
+  at the last state of `master` before the new version. For example, the
+  branch `1.4.2` marks the last commit of `master` at version 1.4.2.
+- Snapshot branches are kept only for the current minor version. When a
+  new minor version is cut, the branch `1.4` marks the last state of the
+  old minor version, and its snapshot branches are deleted. No commit is
+  lost, because each snapshot branch is an ancestor of `1.4`.
+- When a new major version is cut, the branch `1` also marks the last
+  state of the old major version.
+- Major and minor branches are kept indefinitely for now.
+
+To use an earlier version, check out its branch in the clone, for
+example `git checkout 1.4`. The links point into the clone, so the
+harness then reads that version.
+
+`AGENTS.md` holds the same policy as steps for agents, with the version
+check to do immediately before a merge.
