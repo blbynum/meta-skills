@@ -8,6 +8,7 @@ behavior, and at what cost.
 ## Contents
 
 - When to measure
+- Where eval files go
 - Writing the eval set
 - The trigger eval (skills only)
 - The A/B eval (skills and rules)
@@ -27,6 +28,28 @@ unstated skip reads as a run.
 The two evals answer different questions, so run whichever the change
 touches. A description edit needs the trigger eval. A body or rule edit needs
 the A/B eval. A new skill needs both.
+
+## Where eval files go
+
+Keep every eval file outside the artifact's directory and outside the
+repository: the eval set, fixtures, checking scripts, an old copy of the
+artifact, and the results. Some harnesses walk a skills directory
+recursively, so a copy of a `SKILL.md` below a skill's directory loads as a
+second skill there. Results also go stale with the next edit, and version
+control already keeps every old version.
+
+1. Before the run, create a temporary directory with `mktemp -d`. The
+   commands below call it `<eval-dir>`.
+2. Put every input and output of the run in `<eval-dir>`. For `--old`, write
+   the old version there from version control: `git show <ref>:<path>` for
+   one file, or `git archive <ref> <dir> | tar -x -C <eval-dir>` for a skill
+   with references.
+3. Grade the outputs, then write the result into the pass record: the pass
+   counts, the model, the harness version, and the cost.
+4. Delete `<eval-dir>` before the pass ends.
+
+The pass record is all that a run leaves behind. The next pass writes its own
+eval set.
 
 ## Writing the eval set
 
@@ -88,7 +111,7 @@ the eval's `files` field.
 ## The trigger eval (skills only)
 
 ```bash
-python3 ~/.claude/skills/skill-rule-shared/scripts/trigger_eval.py --skill <name> --eval-set queries.json --json result.json
+python3 ~/.claude/skills/skill-rule-shared/scripts/trigger_eval.py --skill <name> --eval-set <eval-dir>/queries.json --json <eval-dir>/result.json
 ```
 
 The script runs each query in a scratch directory and reports how often the
@@ -107,7 +130,7 @@ and ask which rules are loaded, or read the rule text back. Do this once per
 ## The A/B eval (skills and rules)
 
 ```bash
-python3 ~/.claude/skills/skill-rule-shared/scripts/ab_eval.py --evals evals.json --out ./eval-run --mode skill
+python3 ~/.claude/skills/skill-rule-shared/scripts/ab_eval.py --evals <eval-dir>/evals.json --out <eval-dir>/run --mode skill
 ```
 
 For a rule, pass `--mode rule --rule-file <path>`. The script runs every eval

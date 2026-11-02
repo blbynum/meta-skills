@@ -75,7 +75,7 @@ Copy this checklist into the response and check items off as you go:
 - [ ] 4. Draft or revise the rule; check the always-loaded budget and contradictions
 - [ ] 5a. Desk-check against 2–3 evaluation scenarios
 - [ ] 5b. Measure against a no-rule baseline (required for user-wide rules), or state the skip reason
-- [ ] 6. Refresh dates and write the pass record
+- [ ] 6. Refresh dates, write the pass record, and delete the eval directory
 - [ ] 7. Self-maintenance pass on this skill and the shared files
 ```
 
@@ -221,6 +221,10 @@ harness:
 - There is no trigger eval for a rule: an unscoped rule loads every
   session. A file-scoped rule has a loading condition the script cannot
   see; check it by hand once per scoping edit, as evaluating.md describes.
+
+Keep every eval file in a temporary directory outside the repository, and
+delete that directory before the pass ends. Eval files never go in a commit;
+the pass record keeps the result.
 
 Grade the outputs yourself; the script deliberately stops at collecting them.
 Report the comparison including cost, and say plainly when the arms are too

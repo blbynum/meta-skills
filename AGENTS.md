@@ -28,7 +28,7 @@ section and the "Versioning" section of `README.md` in agreement.
      new skill or rule; a new optional config key; a new link script
      option; a skill that does a new kind of task.
    - Snapshot: every other change: guidance edits, fixes, references,
-     evals, documentation.
+     documentation.
 3. Immediately before the merge, check the version again; another change
    can take the number first. Fetch, read `VERSION` on `master`, and set
    the branch's `VERSION` to master's version plus one step at the
