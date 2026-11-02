@@ -153,9 +153,9 @@ highest:
 
 | Level | The change | Examples |
 |---|---|---|
-| Major | breaks the install, or needs more than `git pull` and a new run of `link.sh` | a skill or rule removed or renamed; a config key removed, renamed, or made required; a link script command that worked before now fails |
-| Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key; a new link script option |
-| Snapshot | every other change | guidance edits, fixes, references, documentation |
+| Major | stops something the person had from working, after `git pull` and a new run of `link.sh` | a skill or rule removed or renamed; a config key renamed or made required |
+| Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key |
+| Snapshot | every other change | guidance edits, fixes, references, documentation, changes to the options of `link.sh` |
 
 A branch named after each version stays at the last state of `master`
 before the next version. Snapshot branches (`1.4.2`) are kept only for
@@ -235,15 +235,14 @@ section and the "Versioning" section of `README.md` in agreement.
 2. Pick the level from the change's effect on a person who already has
    the repository linked into a harness. If more than one level fits, use
    the highest.
-   - Major: the install breaks, or needs more than `git pull` and a new
-     run of the link script. Examples: a skill or rule removed or
-     renamed; a config key removed, renamed, or made required; a link
-     script command that worked before now fails.
+   - Major: after `git pull` and a new run of the link script, something
+     the person had stops working. Examples: a skill or rule removed or
+     renamed; a config key renamed or made required.
    - Minor: the install keeps working and gains something. Examples: a
-     new skill or rule; a new optional config key; a new link script
-     option; a skill that does a new kind of task.
+     new skill or rule; a new optional config key; a skill that does a
+     new kind of task.
    - Snapshot: every other change: guidance edits, fixes, references,
-     documentation.
+     documentation, changes to the options of the link script.
 3. Immediately before the merge, check the version again; another change
    can take the number first. Fetch, read `VERSION` on `master`, and set
    the branch's `VERSION` to master's version plus one step at the
@@ -281,16 +280,18 @@ section and the "Versioning" section of `README.md` in agreement.
    - Do not edit `link.sh` in this repository. To update it, replace the
      whole file with the newer version from the source URL in its header,
      and keep the header with the license notice.
-   - A change that replaces `link.sh` takes a level for `VERSION` at
-     least as high as the script's own change: major when a command that
-     worked before now fails; minor for a new option or harness; snapshot
-     for fixes and help text.
+   - A change that replaces `link.sh` is a snapshot change for `VERSION`
+     unless it also fits a higher level in step 2. The script's own
+     version shows a change to its options.
 ````
 
 When the repository is itself the source of `link.sh`, step 7 instead
 says: if a change edits `link.sh`, set `LINK_SH_VERSION` too, at the
-level of its effect on a person who runs the script; the change's level
-for `VERSION` is at least that level; and immediately before the merge,
+level of its effect on a person who runs the script: major when a command
+that worked before now fails; minor for a new option or harness; snapshot
+for fixes and help text. A change to the options of `link.sh` counts only
+toward `LINK_SH_VERSION`, and for `VERSION` it is a snapshot change unless
+it also fits a higher level in step 2. Immediately before the merge,
 read `LINK_SH_VERSION` on `master` and set the branch's value to master's
 value plus one step, because two branches that both raise it from the
 same value merge with no conflict. Step 6 then says to finish steps 3

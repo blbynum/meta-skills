@@ -19,7 +19,7 @@ description: >-
 compatibility: Needs git, a POSIX shell, and Python 3.9 or later for the bundled scripts.
 metadata:
   harness: portable
-  last-verified: "2026-11-01"
+  last-verified: "2026-11-02"
 ---
 
 # AI repository author
@@ -262,8 +262,9 @@ branches, `AGENTS.md`, and the README check. Report what
 matches and what is missing, then apply only the missing parts. Do not
 reorganize what already matches.
 
-A change that moves or renames a skill, or removes or renames a config
-key, breaks the install of a person who already linked the repository.
-It is a major version: ask before you make it. An existing repository
-with no `VERSION` gets `1.0.0` in the change that adds versioning, and it
-keeps its own default branch name, such as `main`.
+A change that removes or renames a skill or rule, or renames a config key
+or makes one required, stops something from working for a person who
+already linked the repository. It is a major version: ask before you make
+it. An existing repository with no `VERSION` gets `1.0.0` in the change
+that adds versioning, and it keeps its own default branch name, such as
+`main`.

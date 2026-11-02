@@ -286,9 +286,9 @@ already has the repository linked into a harness sets the level:
 
 | Level | The change | Examples |
 |---|---|---|
-| Major | breaks the install, or needs more than `git pull` and a new run of the link script | a skill or rule removed or renamed; a config key removed, renamed, or made required; a link script command that worked before now fails |
-| Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key; a new link script option; a skill that does a new kind of task |
-| Snapshot | all other changes | guidance edits, fixes, references, documentation |
+| Major | stops something the person had from working, after `git pull` and a new run of the link script | a skill or rule removed or renamed; a config key renamed or made required |
+| Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key; a skill that does a new kind of task |
+| Snapshot | all other changes | guidance edits, fixes, references, documentation, changes to the options of `link.sh` |
 
 If more than one level fits, use the highest. A minor increase sets the
 snapshot to 0. A major increase sets the minor and the snapshot to 0.
@@ -314,13 +314,19 @@ To use an earlier version, check out its branch in the clone, for
 example `git checkout 1.4`. The links point into the clone, so the
 harness then reads that version.
 
+Commits from before version 1.3.6 use older numbers, in their messages and
+in the `VERSION` file. There, `2.Y.S` means `1.(Y+1).S`: for example,
+`Merge 2.2.4` is version 1.3.4. The names of the version branches use the
+current numbers.
+
 `link.sh` has a version of its own, because people copy it alone into
 other repositories. `./link.sh --version` prints it. The value is
 `LINK_SH_VERSION` near the top of the script, and it is independent of
 `VERSION`. A change that edits `link.sh` sets a new script version, with
 the same three levels judged by the effect on a person who runs the
-script. The level of the change for `VERSION` is at least that level.
-The script version gets no branches.
+script. A change to the options of `link.sh` counts only toward the
+script version. For `VERSION`, it is a snapshot change unless it also
+fits a higher level in the table. The script version gets no branches.
 
 `AGENTS.md` holds the same policy as steps for agents, with the version
 check to do immediately before a merge.
