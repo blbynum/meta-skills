@@ -578,10 +578,11 @@ skill's own `sources.md` otherwise.
 
 ### Agent Skills specification (agentskills.io)
 - URL: https://agentskills.io/specification
-- Last verified: 2026-10-30 (fetched in full for the skill-author config
-  pass; byte-for-byte the same six fields and no configuration mechanism).
-  Previous: 2026-10-24 (fetched in full). No version or date shown on
-  the page.
+- Last verified: 2026-11-02 (fetched in full for the versioning pass; the
+  same six fields, and no version field). Previous: 2026-10-30 (fetched in
+  full for the skill-author config pass; byte-for-byte the same six fields
+  and no configuration mechanism); 2026-10-24 (fetched in full). No version
+  or date shown on the page.
 - Supports: the six frontmatter fields and their constraints (`name` 1–64,
   must match the parent directory name, no consecutive hyphens;
   `description` 1–1024; `license`; `compatibility` 1–500 characters,
@@ -2015,7 +2016,7 @@ grounded in entries above.
   research skills (2026-11-01), session
   69abbd20-032e-4c0c-9880-3d4c6ea3e444 and its forks, read for step 0 of
   the create pass; the user's request that specified the treatment. This
-  repository's `AGENTS.md` at version 2.1.0 is the reference text for the
+  repository's `AGENTS.md` at version 1.2.0 is the reference text for the
   agents-rule template; the step for a copied `link.sh` comes from the
   second repository's `AGENTS.md`.
 - Last verified: 2026-11-01.
@@ -2031,6 +2032,27 @@ grounded in entries above.
   harness; a portable claim made before the portability check existed; a
   first commit under the account name because git had no user name set;
   `git merge -F -` failing with "could not read file '-'".
+
+### ai-repo-author — the definition of a major version (2026-11-02)
+- Sources, read 2026-11-02: SemVer 2.0.0, https://semver.org/ and its
+  source text in the semver/semver repository (rules 1, 3, 4, 5, 8, 11 and
+  the FAQ); the Agent Skills specification and
+  https://github.com/agentskills/agentskills/issues/46; Claude Code
+  https://code.claude.com/docs/en/plugins/loading.md and
+  https://code.claude.com/docs/en/plugins/dependencies.md. Read through an
+  extraction prompt only: EffVer, https://jacobtomlinson.dev/effver/; the
+  Cargo guide, https://doc.rust-lang.org/cargo/reference/semver.html; Go,
+  https://go.dev/doc/modules/version-numbers; GitHub Actions,
+  https://docs.github.com/en/actions/how-tos/create-and-publish-actions/manage-custom-actions;
+  `gh skill`, https://cli.github.com/manual/gh_skill_publish.
+- Last verified: 2026-11-02.
+- Supports: the major test in `references/repository.md` and in this
+  repository's `AGENTS.md`. SemVer defines major by the public API that a
+  project declares, so the project sets the scope. Cargo leaves runtime
+  behavior and applications to the maintainer's judgment. No source read
+  defines a major version for a skill: the specification has no version
+  field, and issue #46 is open. The test is the user's decision of
+  2026-11-02, not a vendor rule.
 
 ### ai-repo-author — instruction-file imports
 - Grounded in "Claude Code memory and rules documentation" (an
