@@ -1,7 +1,7 @@
-# README and license
+# README
 
-How to get a README that is true about the repository, and the
-`LICENSE` file. Read this for step 8.
+How to get a README that is true about the repository. Read this for
+step 8.
 
 ## Contents
 
@@ -9,7 +9,6 @@ How to get a README that is true about the repository, and the
 - Outline
 - Capture the install output
 - Check
-- LICENSE
 
 ## Hand-off
 
@@ -19,7 +18,10 @@ list of skills and rules with their config keys and kinds, and the
 results of the portability checks from step 5. Tell it to read its README
 contract and its style rules before it writes. A README written without
 them carried a false claim, that a skill had a harness reference it did
-not have, which only a later check caught.
+not have, which only a later check caught. Tell it also that licenses are
+out of scope, so that it writes no license section and adds no license
+file even when its contract asks for them. In a repository that already
+has a license section, it keeps that section as it is.
 
 When no doc skill is configured, write the README yourself from the
 outline, and say in the report that no README contract was applied.
@@ -44,9 +46,9 @@ Drop a section that has nothing to say.
    second command links added skills and removes links to deleted ones.
 6. **What is here**: a table with the columns Path, What it does, and
    Config keys. One row for each skill (`skills/<name>/`), each shared
-   directory, each rule (`rules/<name>.md`), `link.sh`, `AGENTS.md`,
-   `VERSION`, and `LICENSE`. Mark required keys "(required)"; write
-   "none" for a skill with no keys.
+   directory, each rule (`rules/<name>.md`), `link.sh`, `AGENTS.md`, and
+   `VERSION`. Mark required keys "(required)"; write "none" for a skill
+   with no keys.
 7. **Per-machine configuration.** Each skill reads its values from
    `config.local.yaml` in its own directory, which git ignores; a skill
    whose required key is missing stops and offers to write the file.
@@ -64,8 +66,6 @@ Drop a section that has nothing to say.
     `AGENTS.md` holds the procedure for agents. When `link.sh` is a copy,
     say that it has its own version (`./link.sh --version`) from its
     source, and that this repository replaces it whole and never edits it.
-12. **License.** MIT, with a link to `LICENSE`; `link.sh` carries its own
-    copy of the notice in its header.
 
 ## Capture the install output
 
@@ -103,20 +103,3 @@ table whose Config keys match its `## Config` table. It exits with status
 Then check by hand what the script cannot: each claim about a skill (its
 kind, its references, its requirements, what it does) against that
 skill's files, and each command against a run.
-
-## LICENSE
-
-Take the MIT text from the notice in `link.sh`'s header, so that the two
-match word for word, and put the configured name (`license-holder`) on
-the copyright line:
-
-```sh
-YEAR=$(date +%Y)
-sed -n '/^# MIT License$/,/^# SOFTWARE\.$/p' <repo>/link.sh \
-  | sed -e 's/^# \{0,1\}//' -e "s/^Copyright (c) .*/Copyright (c) $YEAR <license-holder>/" \
-  > <repo>/LICENSE
-```
-
-Read the result: it starts with `MIT License` and ends with
-`SOFTWARE.`. If `link.sh` has no MIT notice, stop and ask; the copy is
-from the wrong source.

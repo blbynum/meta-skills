@@ -6,16 +6,16 @@ description: >-
   cleans dependencies, keeps data stores out, scrubs personal identifiers
   and the user's research subjects, migrates each skill, lays out skills/
   and rules/, copies in a link script, and sets up versioning, an agents
-  rule, a README, and a license. Use it before any skill files move, when
+  rule, and a README. Use it before any skill files move, when
   the user asks to move skills or rules out of the harness's skills
   directory into a repo, put a set of skills in git, share several skills
   as a repository to clone, set up versioning or a link script for a
-  skills repository, or check whether a skills repository is ready to
+  skills repository, or check whether one is ready to
   share. Triggers include "make a repo out of these skills",
   "move these skills into a git repo", "set up a skills repo like the last
   one", "turn my rules into a repo", and "is this skills repo ready to
-  publish". Not for writing, fixing, or migrating one skill or rule, or
-  for a code repository with no skills or rules.
+  publish". Not for writing, fixing, or migrating one skill or rule, for
+  adding a license, or for a code repository with no skills or rules.
 compatibility: Needs git, a POSIX shell, and Python 3.9 or later for the bundled scripts.
 metadata:
   harness: portable
@@ -27,7 +27,7 @@ metadata:
 This skill makes a git repository out of skills and rules, in the shape
 that `link.sh` links into a harness: `skills/<name>/` and
 `rules/<name>.md` at the root, with a first version, a README, an agents
-rule, a license, and links into the user's harness. Every step below
+rule, and links into the user's harness. Every step below
 exists because a setup done by hand got it wrong: a README with a false
 claim, a stale copy of the link script, real research records shipped as
 examples, scripts that crashed on the system Python, and a scan for
@@ -38,7 +38,6 @@ personal data that scanned no file and reported nothing.
 | Key | Required | Default | Purpose |
 |---|---|---|---|
 | link-script-source | yes | | local clone, or raw-file URL, of the repository that publishes `link.sh`; the copy comes from its default branch as committed |
-| license-holder | yes | | name on the copyright line of `LICENSE` |
 | migrate-skill | no | | skill that migrates one skill to its kind and to config, and runs its checks and trigger evals; when unset, migrate nothing and claim no portability |
 | rule-skill | no | | skill that writes always-loaded rules; when unset, write the agents rule from the template in [references/repository.md](references/repository.md) and say that the rule checks did not run |
 | doc-skill | no | | skill that writes READMEs; when unset, write the README from the outline in [references/readme.md](references/readme.md) and say that no README contract was applied |
@@ -80,6 +79,12 @@ Name the input kind before step 1:
   to commit.
 - Never rewrite the history of an existing repository. Report what the
   history holds and let the user decide.
+- Leave licenses to the user: they are out of scope for this skill. Add,
+  change, or remove no license file or README license section, and report
+  no missing license. If the user asks for a license, say that this skill
+  does not do that work, and continue with the rest. The MIT notice in the
+  header of `link.sh` belongs to that file and stays in each copy; it does
+  not license the repository.
 
 ## Workflow
 
@@ -93,7 +98,7 @@ Copy this checklist into the response and check items off as you go:
 - [ ] 5. Migrate each skill; delete changelogs
 - [ ] 6. Move, copy link.sh, link, and check the links
 - [ ] 7. Versioning and the agents rule
-- [ ] 8. README and LICENSE
+- [ ] 8. README
 - [ ] 9. Commit, final checks, report
 ```
 
@@ -225,16 +230,14 @@ at the root carries the version procedure as steps, with the version
 check immediately before a merge, and `CLAUDE.md` and `GEMINI.md` each
 import it.
 
-### 8. README and LICENSE
+### 8. README
 
 Follow [references/readme.md](references/readme.md). Hand the README to
 the configured doc skill (`doc-skill`) with the outline, the install
 output captured from a scratch home directory, and the facts it needs,
 and tell it to read its README contract and style rules before it writes.
 Then run `scripts/readme_check.py` on the repository and check each claim
-about a skill against that skill's files. Write `LICENSE` with the MIT
-text from the notice in `link.sh`'s header and the configured name
-(`license-holder`).
+about a skill against that skill's files.
 
 ### 9. Commit and report
 
@@ -256,7 +259,7 @@ For a directory or repository that already holds skills or rules, run
 each step as a check before you change anything: the dependency check,
 the launder scan (with `--history` in a repository), the migrate skill's
 checks, `link.sh` compared with its source, `VERSION`, the version
-branches, `AGENTS.md`, the README check, and `LICENSE`. Report what
+branches, `AGENTS.md`, and the README check. Report what
 matches and what is missing, then apply only the missing parts. Do not
 reorganize what already matches.
 

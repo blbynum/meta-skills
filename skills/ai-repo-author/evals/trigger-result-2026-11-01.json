@@ -12,11 +12,11 @@
     ],
     "skill_listed_in_roster": true,
     "runs_per_query": 3,
-    "passed": 24,
-    "total": 24,
+    "passed": 25,
+    "total": 25,
     "recall": 1,
     "false_positive_rate": 0,
-    "total_cost_usd": 0.7103
+    "total_cost_usd": 0.6803
   },
   "results": [
     {
@@ -25,7 +25,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21347046666666666,
+      "cost_usd_mean": 0.2015712,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -35,7 +35,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21601626666666668,
+      "cost_usd_mean": 0.21156026666666666,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -45,7 +45,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21204299999999998,
+      "cost_usd_mean": 0.22443593333333334,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -55,7 +55,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21400399999999997,
+      "cost_usd_mean": 0.22110766666666667,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -65,7 +65,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21453293333333334,
+      "cost_usd_mean": 0.23476366666666668,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -75,7 +75,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.2235012,
+      "cost_usd_mean": 0.23344979999999999,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -85,7 +85,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21634893333333333,
+      "cost_usd_mean": 0.22955733333333334,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -95,7 +95,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.21233753333333333,
+      "cost_usd_mean": 0.23185313333333335,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -105,7 +105,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.211668,
+      "cost_usd_mean": 0.24319293333333333,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -115,7 +115,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.220812,
+      "cost_usd_mean": 0.23867486666666668,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -125,7 +125,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.16855546666666665,
+      "cost_usd_mean": 0.15937086666666667,
       "other_skills_invoked": [
         "skill-author"
       ],
@@ -137,7 +137,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.22950006666666667,
+      "cost_usd_mean": 0.23847433333333334,
       "other_skills_invoked": [
         "skill-author"
       ],
@@ -149,7 +149,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.24066046666666668,
+      "cost_usd_mean": 0.2579634,
       "other_skills_invoked": [
         "rule-author"
       ],
@@ -161,7 +161,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.2036292,
+      "cost_usd_mean": 0.20669053333333332,
       "other_skills_invoked": [
         "doc-author"
       ],
@@ -173,7 +173,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.1476576,
+      "cost_usd_mean": 0.16450526666666668,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -183,7 +183,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.23241406666666667,
+      "cost_usd_mean": 0.24776893333333336,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -193,7 +193,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.2377868,
+      "cost_usd_mean": 0.22249986666666668,
       "other_skills_invoked": [
         "skill-author"
       ],
@@ -205,7 +205,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.229057,
+      "cost_usd_mean": 0.23948593333333332,
       "other_skills_invoked": [
         "skill-author"
       ],
@@ -217,7 +217,7 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.15034313333333332,
+      "cost_usd_mean": 0.1567598,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -227,7 +227,17 @@
       "trigger_rate": 0,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.1602642,
+      "cost_usd_mean": 0.1780892,
+      "other_skills_invoked": [],
+      "pass": true
+    },
+    {
+      "query": "add an MIT license to my skills repo at ~/src/ops-skills",
+      "should_trigger": false,
+      "trigger_rate": 0,
+      "runs": 3,
+      "failed_runs": 0,
+      "cost_usd_mean": 0.1889766,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -237,7 +247,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.223553,
+      "cost_usd_mean": 0.22586426666666667,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -247,7 +257,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.23199173333333334,
+      "cost_usd_mean": 0.22495513333333333,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -257,7 +267,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.23338199999999998,
+      "cost_usd_mean": 0.22699806666666666,
       "other_skills_invoked": [],
       "pass": true
     },
@@ -267,7 +277,7 @@
       "trigger_rate": 1,
       "runs": 3,
       "failed_runs": 0,
-      "cost_usd_mean": 0.23675853333333335,
+      "cost_usd_mean": 0.22677246666666667,
       "other_skills_invoked": [],
       "pass": true
     }

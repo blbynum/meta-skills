@@ -162,8 +162,8 @@ skills and rules of your own git repository the same way:
    `./link.sh`.
 
 The `ai-repo-author` skill does these steps, and the rest of the setup
-of such a repository: dependencies, data, personal data, versioning, the
-README, and the license.
+of such a repository: dependencies, data, personal data, versioning, and
+the README.
 
 To compare your copy with the latest version, run `./link.sh --version`.
 Then compare the result with `LINK_SH_VERSION` in the file at the source
@@ -186,7 +186,7 @@ about each one.
 | `skills/ai-retrospective/` | Audits how the agent worked in one session from its raw transcript, then proposes changes. | `prompt-skill`, `rule-skill`, `skills-skill`, `settings-skill` |
 | `skills/research/` | Desk research: finds, weighs, and synthesizes sources, with stated confidence. | `notes-skill`, `appraisal-skill` |
 | `skills/study-credibility/` | Appraises whether a study or research-backed claim is trustworthy. | none |
-| `skills/ai-repo-author/` | Turns skills and rules into a git repository that people link into a harness, or audits an existing one: dependencies, data, personal data, migration, `link.sh`, versioning, README, and license. | `link-script-source` (required), `license-holder` (required), `migrate-skill`, `rule-skill`, `doc-skill` |
+| `skills/ai-repo-author/` | Turns skills and rules into a git repository that people link into a harness, or audits an existing one: dependencies, data, personal data, migration, `link.sh`, versioning, and README. | `link-script-source` (required), `migrate-skill`, `rule-skill`, `doc-skill` |
 | `skills/skill-rule-shared/` | Not a skill. The ledger, evaluation method, eval scripts, prose standards, and the skill-versus-rule decision framework that `skill-author` and `rule-author` share. | — |
 | `link.sh` | The link script described above. It has its own version and its own copy of the license notice; see [Versioning](#versioning). | — |
 | `AGENTS.md` | Instructions for agents that work on this repository: the version procedure. `link.sh` does not link it. `CLAUDE.md` and `GEMINI.md` import it for the harnesses and versions that do not read `AGENTS.md` directly. | — |
