@@ -155,14 +155,15 @@ ledger by owner before the move.
 
 ### 4. Launder
 
-Follow [references/launder.md](references/launder.md). Scan everything
+Follow [references/launder.md](references/launder.md). First delete each
+`evals/` directory among the inputs and list them in the report: eval files
+stay out of the repository. Then scan everything
 that will be committed with `scripts/launder_scan.py`: the user's name,
 emails, accounts, hostnames, IP addresses, home paths, and the user's own
 research subjects, taken from the user's data stores and searched as whole
 words. Replace a path with `~` or `<user>` so the line still works.
 Replace a real record used as an example with a fictional one of the same
-shape. Replace a real organization in an eval prompt with a fictional one.
-Keep public subject matter that a skill teaches from, with its source.
+shape. Keep public subject matter that a skill teaches from, with its source.
 Rerun the scan after the edits and show its counts.
 
 Do not search with a hand-written shell loop instead of the script. The
@@ -179,14 +180,12 @@ the kind the user chose in step 1. Its pass must leave:
   reason for each hit;
 - frontmatter that parses as strict YAML, with `compatibility` present;
 - one fresh-session run that read a configured value;
-- a trigger eval when a description changed, including the eval prompts
-  that step 4 changed, so that the committed results match the committed
-  prompts.
+- a trigger eval when a description changed, with its eval files kept
+  outside the repository.
 
 When no migrate skill is configured, migrate nothing: keep each skill as
-it is, make no portability claim in the README, leave out of the commit
-any trigger-eval result whose prompts step 4 changed, and list the
-migration as left for the user.
+it is, make no portability claim in the README, and list the migration as
+left for the user.
 
 No changelog file. Version control is the record: the pass record goes
 into the report and the commit message. Delete each `CHANGELOG.md` among
@@ -210,8 +209,8 @@ Follow [references/repository.md](references/repository.md), sections
 3. Copy `link.sh` unchanged from the default branch of the configured
    source (`link-script-source`), never from its working tree, and
    compare the copy with the source.
-4. Add the root `.gitignore`: `config.local.yaml`, `.DS_Store`, and
-   `__pycache__/`.
+4. Add the root `.gitignore`: `config.local.yaml`, `.DS_Store`,
+   `__pycache__/`, and `skills/*/evals/`.
 5. Run `./link.sh --harness <id>` for the user's harness, run it again,
    and confirm that it reports no changes and skipped no name. Run `scripts/dep_check.py`
    with `--linked` to confirm that the links resolve and that relative

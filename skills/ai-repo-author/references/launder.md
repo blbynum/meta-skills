@@ -90,13 +90,6 @@ argument and print how many files the search read.
   same shape: the same fields, the same id pattern, an obviously
   fictional name ("Pat Example", "Example Strategies LLC", jurisdiction
   `XX`). Keep the schema unchanged.
-- **A real organization in an eval prompt**: use a fictional one of the
-  same kind. Put a fictional place in front of a generic name, so that the
-  name does not match a real group ("Exampleton Citizens for Clean Water").
-  Then rerun the trigger eval through the migrate skill so that the
-  committed results match the committed prompts. When no migrate skill is
-  configured, leave the old result file out of the commit and list it in
-  the report.
 - **A design note about the user's own sessions, cases, or region**:
   generalize it ("cases from one region's politics") and drop links into
   the data store.

@@ -288,7 +288,7 @@ already has the repository linked into a harness sets the level:
 |---|---|---|
 | Major | breaks the install, or needs more than `git pull` and a new run of the link script | a skill or rule removed or renamed; a config key removed, renamed, or made required; a link script command that worked before now fails |
 | Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key; a new link script option; a skill that does a new kind of task |
-| Snapshot | all other changes | guidance edits, fixes, references, evals, documentation |
+| Snapshot | all other changes | guidance edits, fixes, references, documentation |
 
 If more than one level fits, use the highest. A minor increase sets the
 snapshot to 0. A major increase sets the minor and the snapshot to 0.

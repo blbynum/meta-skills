@@ -63,13 +63,16 @@ Evals file format:
 
 Usage:
 
-  python3 ab_eval.py --evals evals.json --out ./eval-run --mode skill
-  python3 ab_eval.py --evals evals.json --out ./eval-run --mode rule \
+  python3 ab_eval.py --evals <eval-dir>/evals.json --out <eval-dir>/run --mode skill
+  python3 ab_eval.py --evals <eval-dir>/evals.json --out <eval-dir>/run --mode rule \
       --rule-file ~/.claude/rules/<name>.md
-  python3 ab_eval.py --evals evals.json --out ./eval-run --mode rule \
-      --old ./<name>.old.md --new ~/.claude/rules/<name>.md
-  python3 ab_eval.py --evals evals.json --out ./eval-run --mode skill \
-      --old ./SKILL.old.md --new ~/.claude/skills/<name>/SKILL.md
+  python3 ab_eval.py --evals <eval-dir>/evals.json --out <eval-dir>/run --mode rule \
+      --old <eval-dir>/<name>.old.md --new ~/.claude/rules/<name>.md
+  python3 ab_eval.py --evals <eval-dir>/evals.json --out <eval-dir>/run --mode skill \
+      --old <eval-dir>/SKILL.old.md --new ~/.claude/skills/<name>/SKILL.md
+
+<eval-dir> is a temporary directory outside the artifact's directory and the
+repository. Delete it when the pass ends; evaluating.md says why.
 """
 
 import argparse

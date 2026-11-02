@@ -39,6 +39,7 @@ links, git, versions, commits, merges, the agents rule, and the push.
    config.local.yaml
    .DS_Store
    __pycache__/
+   skills/*/evals/
    ```
 
    Do not delete `__pycache__` or `.DS_Store` with `rm -rf`; the ignore
@@ -154,7 +155,7 @@ highest:
 |---|---|---|
 | Major | breaks the install, or needs more than `git pull` and a new run of `link.sh` | a skill or rule removed or renamed; a config key removed, renamed, or made required; a link script command that worked before now fails |
 | Minor | adds something the install can use, and breaks nothing | a new skill or rule; a new optional config key; a new link script option |
-| Snapshot | every other change | guidance edits, fixes, references, evals, documentation |
+| Snapshot | every other change | guidance edits, fixes, references, documentation |
 
 A branch named after each version stays at the last state of `master`
 before the next version. Snapshot branches (`1.4.2`) are kept only for
@@ -242,7 +243,7 @@ section and the "Versioning" section of `README.md` in agreement.
      new skill or rule; a new optional config key; a new link script
      option; a skill that does a new kind of task.
    - Snapshot: every other change: guidance edits, fixes, references,
-     evals, documentation.
+     documentation.
 3. Immediately before the merge, check the version again; another change
    can take the number first. Fetch, read `VERSION` on `master`, and set
    the branch's `VERSION` to master's version plus one step at the

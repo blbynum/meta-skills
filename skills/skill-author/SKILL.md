@@ -84,7 +84,7 @@ Copy this checklist into the response and check items off as you go:
 - [ ] 4. Draft or revise the skill
 - [ ] 5a. Desk-check against 2–3 evaluation scenarios
 - [ ] 5b. Measure where a runner exists: trigger eval for every description change, A/B against a baseline for user-wide skills — or state the skip reason
-- [ ] 6. Refresh dates and write the pass record
+- [ ] 6. Refresh dates, write the pass record, and delete the eval directory
 - [ ] 7. Self-maintenance pass on this skill and the shared files
 ```
 
@@ -244,6 +244,10 @@ shared directory's `scripts/`:
 - `ab_eval.py --mode skill` runs task prompts with and without the skill,
   three runs per arm, and saves outputs, transcripts, cost, the harness
   version, and the resolved model.
+
+Keep every eval file in a temporary directory outside the skill and the
+repository, and delete that directory before the pass ends. Eval files never
+go in a skill's directory or in a commit; the pass record keeps the result.
 
 Grade the outputs yourself; the scripts deliberately stop at collecting them.
 Report the comparison including cost, and say plainly when the arms are too
