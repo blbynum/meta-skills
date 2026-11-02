@@ -19,6 +19,7 @@
   {"id": "nm-make-one-skill-shareable", "query": "make the prompt-author skill shareable so it works in cursor too", "should_trigger": false},
   {"id": "nm-scan-for-secrets", "query": "scan this repo for leaked api keys and tokens before i push it", "should_trigger": false},
   {"id": "nm-edit-link-script", "query": "add windsurf as a harness option to link.sh in meta-skills", "should_trigger": false},
+  {"id": "nm-add-license", "query": "add an MIT license to my skills repo at ~/src/ops-skills", "should_trigger": false},
   {"id": "holdout-skills-to-codeberg", "query": "get my research-ish skills into their own repo with a license, i want to put them on codeberg", "should_trigger": true},
   {"id": "holdout-job-hunt-skills-for-partner", "query": "take the five skills i made for the job hunt and turn them into something my partner can install on her laptop", "should_trigger": true},
   {"id": "holdout-rules-to-team-github", "query": "copy my agent rules into a github repo so the rest of the team can link them", "should_trigger": true},

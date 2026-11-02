@@ -2047,5 +2047,4 @@ grounded in entries above.
   directory, 2026-11-01 (link.sh 1.0.0, this repository at 2.1.0).
 - Supports: the repository shape; that the script links only from inside
   a git repository; `--harness`; the second run printing `no changes`; the
-  MIT notice in the header, from which the skill builds `LICENSE` (the
-  result matched this repository's `LICENSE` byte for byte).
+  MIT notice in the header, which each copy of the script keeps.

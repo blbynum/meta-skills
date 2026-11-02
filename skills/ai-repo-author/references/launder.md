@@ -113,8 +113,9 @@ report with its reason.
   the ledger: a nationally reported organization used as a textbook
   example. Check that the term is not in the user's data store; if it is
   there, the user researched it, and it is the user's subject.
-- **The license holder's name** on the copyright lines of `LICENSE` and of
-  the notice in `link.sh`. Pass `--allow-line 'Copyright \(c\)'`.
+- **The name on a copyright line**, in the notice in `link.sh` or in a
+  license file that the repository already has. Pass
+  `--allow-line 'Copyright \(c\)'`.
 - **The account in the clone URL** of the README, which names where the
   repository lives.
 - **The `/Users/you` placeholder** in captured output. The script already
