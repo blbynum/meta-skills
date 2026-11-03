@@ -217,7 +217,7 @@ stops and offers to write the file with the values you give it.
 
 Companion-skill keys name a skill the harness can load by name; the
 companion does not have to live in this repository. On this machine, for
-example, `research` names a `notes` skill that lives elsewhere.
+example, `research` names a `note-author` skill that lives elsewhere.
 
 ## Portability
 
