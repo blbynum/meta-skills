@@ -253,16 +253,11 @@ audits from the conversation in context and says so.
 
 ## The provenance ledger
 
-The skills carry no citations. Provenance lives in
-`skills/skill-rule-shared/sources.md`: every source behind the authoring
-guidance (skill and rule best practices, the Agent Skills specification,
-harness documentation, prompting guidance, research papers) and the
-subject-matter sources of the seven skills here, each with the date it was
-last verified and the models or vintage a finding was measured on.
-
-A skill outside this repository keeps its own `sources.md` in its
-directory, never linked from its `SKILL.md`. The authoring skills read
-whichever ledger holds the skill they are working on.
+The skills carry no citations. Every skill keeps its sources in a
+`sources.md` in its own directory, never linked from its `SKILL.md`, each
+with the date it was last verified and the models or vintage a finding
+was measured on. `skills/skill-rule-shared/sources.md` holds the sources
+that `skill-author` and `rule-author` both use.
 
 ## Requirements
 

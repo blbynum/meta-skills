@@ -68,12 +68,9 @@ When the contract and scripts live inside the data directory today:
 A provenance ledger (`sources.md`) records the sources behind a skill's
 guidance, with the date each was last verified.
 
-- The ledger of the authoring skills, the one that the migrate skill and
-  the rule skill share, keeps its core sources and the sections for the
-  skills in the same repository as itself.
-- Every other skill keeps its sections in a `sources.md` in its own
-  directory. Its `SKILL.md` never links that file, so the file costs no
-  context when the skill loads.
+- Every skill keeps its sections in a `sources.md` in its own directory.
+  Its `SKILL.md` never links that file, so the file costs no context when
+  the skill loads.
 - Sections for skills that exist nowhere any more go to one file outside
   the repository, in a place the user names.
 - Split before the move, so that the move carries the right sections.

@@ -68,10 +68,8 @@ for Claude Code.
   patterns" section. Naming the model or the date a finding was measured on
   is not time-sensitive phrasing; it is the qualifier every claim carries.
 - No citations or source URLs inside SKILL.md or the files it links.
-  Provenance lives in a ledger: the skill's own `sources.md` beside its
-  SKILL.md, never linked from it, or the shared
-  [sources.md](../../skill-rule-shared/sources.md) for a skill that lives
-  beside the authoring skills.
+  Provenance lives in the skill's own `sources.md` beside its SKILL.md,
+  never linked from it.
 
 ## Writing skills: scripts
 

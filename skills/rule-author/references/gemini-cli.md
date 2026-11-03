@@ -1,7 +1,7 @@
 # Gemini CLI
 
-Rule files as Gemini CLI's documentation stated them on the date in the
-shared ledger; re-read its context-file page before you write one.
+Rule files as Gemini CLI's documentation stated them on the date in this
+skill's `sources.md`; re-read its context-file page before you write one.
 
 - Global: `~/.gemini/GEMINI.md`.
 - Project: `GEMINI.md` in the workspace directories and their parent

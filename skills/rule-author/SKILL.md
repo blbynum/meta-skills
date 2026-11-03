@@ -76,7 +76,6 @@ Copy this checklist into the response and check items off as you go:
 - [ ] 5a. Desk-check against 2–3 evaluation scenarios
 - [ ] 5b. Measure against a no-rule baseline (required for user-wide rules), or state the skip reason
 - [ ] 6. Refresh dates, write the pass record, and delete the eval directory
-- [ ] 7. Self-maintenance pass on this skill and the shared files
 ```
 
 For a pure choice question ("should this be a skill or a rule?"), run steps
@@ -120,13 +119,8 @@ sources already read in this pass. Trained knowledge and this skill's own
 text both go stale; the ledger exists to catch that.
 
 1. Read the ledger entries that concern the pass: the core-source entries
-   named in step 7, in the shared
-   [sources.md](../skill-rule-shared/sources.md), plus the rule's own
-   subject entries, which live in the shared file too (a rules directory
-   cannot hold a ledger, because every file there loads as a rule).
-   Reading the whole file is not required. Re-read an entry immediately
-   before you edit it: another session may have written to the file in
-   between, and an edit built on a stale read discards their work.
+   in the shared [sources.md](../skill-rule-shared/sources.md) and in this
+   skill's own `sources.md`.
 2. Re-fetch the tier-1 sources relevant to the request — the harness's
    documentation for its rule files, and its permissions documentation when
    the rule needs an enforcement layer, both named in the harness
@@ -139,10 +133,8 @@ text both go stale; the ledger exists to catch that.
 4. Every entry records the models or vintage a finding was measured on. Carry
    that qualifier into the rule; a claim that drops it is the most common
    error the ledger has recorded.
-5. Provenance lives in the shared `sources.md`, not in the user's notes;
-   a skill's subject matter lives in that skill's own `sources.md`.
-   Write a note only when the user asks for one, through whatever notes
-   skill the user has.
+5. A rule has no sources file; name the sources it rests on in the report
+   and the commit message.
 
 ### 3. Confirm the mechanism
 
@@ -167,8 +159,7 @@ format and budget rules — and the shared
 prose style and deprecated patterns — before writing. Three rules bear
 repeating because they are easy to miss:
 
-- Produced rules carry no citations or source URLs. Provenance lives in the
-  shared ledger, so the rules stay clean and cheap.
+- Produced rules carry no citations or source URLs.
 - Every rule gets a verification marker: a one-line
   `<!-- last-verified: YYYY-MM-DD -->` comment. Whether the harness strips
   it before injection is in the harness reference; one line costs little
@@ -244,30 +235,12 @@ close to call rather than reading a win into noise.
 - Name the check honestly. A step-5a walk-through is "desk-checked against N
   scenarios". Write "tested" or "measured" only when 5b ran, and give the
   numbers, the model, and the harness version.
-
-### 7. Self-maintain
-
-Every pass ends by turning the findings on this skill itself:
-
-- If research contradicted or extended anything this skill, its standards
-  file, or a shared file says, update them in the same pass, subject to the
-  same evidence bar. Name a change to a shared file as shared in the pass
-  record, so the next pass over the shared files sees it.
 - A claim about model behavior — a rate, a tendency, an effect — observed
   in this pass on one query, one session, or fewer than ten runs goes to
-  the user in the report, labeled unconfirmed. Do not write it into a file
-  for a later pass to read: not the rule, this skill, a standards file,
-  evaluating.md, the ledger, or the commit message. It enters guidance
-  only when it clears the evidence bar (tier 1–2 support, or a measured
-  effect across a real eval set).
-- Refresh last-verified dates in the ledger that holds each source
-  actually re-checked, and this skill's own `metadata.last-verified` when
-  the pass verified its core sources: the harness's rule-file and
-  permissions documentation named in the harness reference, and the
-  prompting best-practices page. A pass that touches the shared decision
-  framework re-reads the harness's skills documentation as well.
-- Include the changes to this skill and the shared files in the pass
-  record.
+  the user in the report, labeled unconfirmed. Do not write it into the
+  rule or the commit message. It enters guidance only when it clears the
+  evidence bar (tier 1–2 support, or a measured effect across a real eval
+  set).
 
 ## Updating
 

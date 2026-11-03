@@ -8,7 +8,7 @@ place:
 
 | File | What it is | Who reads and writes it |
 |---|---|---|
-| `sources.md` | The provenance ledger for the authoring sources (skill and rule guidance, the spec, harness docs, research) and for the subject matter of the skills that live beside this directory. Every other skill keeps its own `sources.md` in its directory, never linked from its SKILL.md. | Both skills, at their research and self-maintenance steps. Re-read an entry immediately before you edit it: another session may have written to it in between. |
+| `sources.md` | The provenance ledger for the sources that both authoring skills use. Every skill keeps its own `sources.md` in its directory, never linked from its SKILL.md. | Both skills read it at their research step. |
 | `evaluating.md` | How to measure an artifact: eval sets, the trigger eval (skills only), the A/B eval (skills and rules), the confounds to record, how to read results. | Both skills at their measure step. |
 | `scripts/trigger_eval.py` | Measures how often a skill loads across should-trigger and near-miss prompts. | The skills author. |
 | `scripts/ab_eval.py` | Runs task prompts with and without an artifact (`--mode skill`, `--mode rule`, `--old/--new`). | Both skills. |
