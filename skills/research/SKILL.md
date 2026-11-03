@@ -256,8 +256,9 @@ low when the primary source could not be read.
 - A report the user wants to keep is a document, not a note: hand it to
   the docs skill as a report, in a second call, and keep the facts it
   settled as notes.
-- If the research fed a skill or rule, record subject-matter sources in
-  the ledger of the skill that authored the artifact, not in the artifact.
+- If the research fed a skill, record the sources in that skill's own
+  `sources.md`, not in the skill. If it fed a rule, record them in the
+  report.
 
 ## Failure modes to name when you see them
 

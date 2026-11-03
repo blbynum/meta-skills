@@ -1,7 +1,7 @@
 # Cursor
 
-Rule files as Cursor's documentation stated them on the date in the shared
-ledger; re-read its rules page before you write one.
+Rule files as Cursor's documentation stated them on the date in this
+skill's `sources.md`; re-read its rules page before you write one.
 
 - Project rules: `.cursor/rules/*.mdc`, version-controlled; a plain `.md`
   file there is ignored because it has no frontmatter. `AGENTS.md` in the

@@ -1,7 +1,8 @@
 # GitHub Copilot
 
-Rule files as GitHub's documentation stated them on the date in the
-shared ledger; re-read its custom-instructions page before you write one.
+Rule files as GitHub's documentation stated them on the date in this
+skill's `sources.md`; re-read its custom-instructions page before you
+write one.
 
 - Repository-wide: `.github/copilot-instructions.md`.
 - Path-specific: `NAME.instructions.md` under `.github/instructions/`,

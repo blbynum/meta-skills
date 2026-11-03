@@ -1,7 +1,7 @@
 # Codex
 
-Rule files as Codex's documentation stated them on the date in the shared
-ledger; re-read its AGENTS.md page before you write one.
+Rule files as Codex's documentation stated them on the date in this
+skill's `sources.md`; re-read its AGENTS.md page before you write one.
 
 - Global: `~/.codex/AGENTS.override.md` if it exists, otherwise
   `~/.codex/AGENTS.md`; only the first non-empty file at this level.

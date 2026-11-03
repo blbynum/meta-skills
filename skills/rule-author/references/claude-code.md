@@ -4,7 +4,7 @@ What differs when rule-author runs in Claude Code: where rules live, how
 they load and scope, the mechanisms the body names generically, and the
 measurement runner. Read this when you run in Claude Code, before step 1
 and again before step 5. The memory doc and the permissions doc are the
-sources, with dates in the shared ledger.
+sources, with dates in the shared ledger and in this skill's `sources.md`.
 
 ## Contents
 
@@ -93,5 +93,6 @@ A/Bs:
 
 The memory doc is the source for everything above the measurement
 section; the permissions doc for hooks and `permissions.deny`; the skills
-doc when the shared decision framework changes. All three are in the
-shared ledger with last-verified dates.
+doc when the shared decision framework changes. The memory doc and the
+skills doc are in the shared ledger with last-verified dates; the
+permissions doc is in this skill's `sources.md`.

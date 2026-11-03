@@ -143,4 +143,5 @@ contested when a recent source disagrees with an older consensus.
 - Durable findings → the configured notes skill (`notes-skill`), with the
   provenance records as the note's sources. When none is set, record
   nothing; the report holds the findings.
-- Sources that shaped a skill or rule → the authoring skill's ledger, not the artifact.
+- Sources that shaped a skill → that skill's own `sources.md`, not the
+  skill. Sources that shaped a rule → the report.
