@@ -196,9 +196,12 @@ More hazards to check before you trust a run:
 - A skill's reference files live in its own directory, outside the
   throwaway run directory, so a `Read` of them needs a permission that a
   non-interactive run denies. `ab_eval.py --mode skill` pre-allows
-  `Read(//<abs skill dir>/**)` in both arms for that reason. When the
-  artifact reads files anywhere else, check the transcripts for
-  "requested permissions to read".
+  `Read(//<abs skill dir>/**)` in both arms for that reason. It allows both
+  paths of a linked skill, the symlink path and the resolved path. A run
+  reads a linked skill through its symlink, and a rule for the resolved path
+  does not match that path. `summary.json` lists the rules under
+  `allowed_tools`. When the artifact reads files anywhere else, check the
+  transcripts for "requested permissions to read".
 - A with-arm run where the skill did not load is a baseline run, whatever
   the model's output says. Read the `artifact_loaded` flag and the Skill
   call's result in the transcript; a Skill call that returned an error

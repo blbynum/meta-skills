@@ -178,6 +178,31 @@ def stage_skill_version(run_dir: Path, name: str, version_file: Path) -> None:
     skill_md.write_text(text)
 
 
+def skill_read_rules(skill: str) -> list[str]:
+    """Return the Read rules that pre-allow the skill's own directory.
+
+    A skill's reference files live in its own directory, outside the
+    throwaway run directory, so reading them prompts for permission and a
+    non-interactive run denies it — the with-arm then runs on SKILL.md
+    alone (seen 2026-08-19: every reference read in the with-arm returned
+    "Claude requested permissions to read"). The rules go to both arms; the
+    without-arm never loads the skill, so the grant is inert there.
+
+    A linked skill is read through its symlink path, which a rule for the
+    resolved path does not match (seen 2026-11-02 on take-ticket), so a
+    linked skill gets a rule for each path. Any other skill gets one rule.
+    """
+    for root in (Path.home() / ".claude" / "skills",
+                 Path.cwd() / ".claude" / "skills"):
+        skill_dir = root / skill
+        if skill_dir.is_dir():
+            # Rule syntax: "//" marks an absolute path, followed by the
+            # path without its leading slash — Read(//Users/x/...).
+            paths = dict.fromkeys((str(skill_dir), str(skill_dir.resolve())))
+            return [f"Read(//{path.lstrip('/')}/**)" for path in paths]
+    return []
+
+
 def build_command(job: dict) -> list[str]:
     cmd = [
         "claude", "-p", job["query"],
@@ -193,26 +218,8 @@ def build_command(job: dict) -> list[str]:
     # Non-interactive runs cannot answer a permission prompt, so a tool that
     # would prompt (WebSearch, WebFetch, Bash) is silently denied. Pass the
     # tools the artifact needs so both arms can actually do the task.
-    allowed = list(job.get("allowed_tools") or [])
-    # A skill's reference files live in its own directory, outside the
-    # throwaway run directory, so reading them prompts for permission and a
-    # non-interactive run denies it — the with-arm then runs on SKILL.md
-    # alone (seen 2026-08-19: every reference read in the with-arm returned
-    # "Claude requested permissions to read"). Pre-allow reads of the skill
-    # directory in both arms; the without-arm never loads the skill, so the
-    # grant is inert there.
-    if job["mode"] == "skill" and job.get("skill"):
-        for root in (Path.home() / ".claude" / "skills",
-                     Path.cwd() / ".claude" / "skills"):
-            skill_dir = root / job["skill"]
-            if skill_dir.is_dir():
-                # Rule syntax: "//" marks an absolute path, followed by the
-                # path without its leading slash — Read(//Users/x/...).
-                abs_path = str(skill_dir.resolve()).lstrip("/")
-                allowed.append(f"Read(//{abs_path}/**)")
-                break
-    if allowed:
-        cmd += ["--allowed-tools", *allowed]
+    if job["allowed_tools"]:
+        cmd += ["--allowed-tools", *job["allowed_tools"]]
 
     mode, arm, skill = job["mode"], job["arm"], job["skill"]
     if job["versions"]:
@@ -398,6 +405,10 @@ def main() -> int:
               "evals file", file=sys.stderr)
         return 1
 
+    allowed_tools = list(args.allowed_tools or [])
+    if args.mode == "skill":
+        allowed_tools += skill_read_rules(skill)
+
     jobs = []
     for item in evals:
         for arm in arms:
@@ -415,7 +426,7 @@ def main() -> int:
                     "versions": versions,
                     "model": args.model,
                     "effort": args.effort,
-                    "allowed_tools": args.allowed_tools,
+                    "allowed_tools": allowed_tools,
                     "timeout": args.timeout,
                     "budget": args.budget,
                 })
@@ -434,7 +445,7 @@ def main() -> int:
         "comparison": "old-vs-new" if versions else "with-vs-without",
         "model_requested": args.model or "default",
         "effort_requested": args.effort or "default",
-        "allowed_tools": args.allowed_tools or [],
+        "allowed_tools": allowed_tools,
         "model": models_seen[0] if len(models_seen) == 1 else models_seen,
         "claude_code_version": (versions_seen[0] if len(versions_seen) == 1
                                 else versions_seen),
