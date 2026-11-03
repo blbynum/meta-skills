@@ -230,8 +230,8 @@ close to call rather than reading a win into noise.
   and the 5b result — into the report to the user, and
   into the commit message when the change is committed. If the user wants
   a history of the rule, recommend a version control repository for it.
-- A "checked, no change" pass still refreshes the last-verified markers —
-  future runs use those dates to decide what needs re-verification.
+- A "checked, no change" pass still refreshes the rule's marker — future
+  runs use those dates to decide what needs re-verification.
 - Name the check honestly. A step-5a walk-through is "desk-checked against N
   scenarios". Write "tested" or "measured" only when 5b ran, and give the
   numbers, the model, and the harness version.

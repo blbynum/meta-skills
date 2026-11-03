@@ -4,9 +4,8 @@ Provenance ledger for the rule-author skill: every subject-matter claim it
 makes, with the source, the date it was last verified, and the models or
 vintage a finding was measured on. SKILL.md does not link this file, so it
 never loads with the skill. The authoring skill reads it at its research
-step and refreshes the "Last verified" dates of the sources it re-checks.
-Moved out of the shared ledger on 2026-11-03; entries keep their original
-wording and dates.
+step. Moved out of the shared ledger on 2026-11-03; entries keep their
+original wording and dates.
 
 ## Tier 1: Anthropic official
 
