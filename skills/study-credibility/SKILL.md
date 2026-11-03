@@ -4,7 +4,7 @@ compatibility: Verification examples use curl against public literature APIs.
 metadata:
   harness: portable
   export: portable
-  last-verified: "2026-08-15"
+  last-verified: "2026-11-02"
 description: Evaluates whether a study, paper, trial, meta-analysis, preprint, or research-backed claim is trustworthy and what it actually supports — appraising design, statistics, spin, replication status, and the funding, financial ties, and ideological interests behind it. Use whenever someone shares a study, DOI, PubMed/journal link, preprint, or news article about research and asks if it is legitimate, reliable, credible, well-designed, biased, industry-funded, or worth believing — including softer forms like "is this true?", "should I trust this?", "does this prove X?", "who paid for this?", or "debunk this." Use proactively when someone leans on a single study to support a health or factual claim, mentions a supplement, drug, diet, or policy study, or asks you to reconcile conflicting studies — even if they never say "credibility" or "evaluate."
 ---
 
@@ -13,6 +13,18 @@ description: Evaluates whether a study, paper, trial, meta-analysis, preprint, o
 The goal is not to sort studies into "good" and "bad." It is to answer a sharper question: **given how this study was built, who built it, and what constrained them, what claim does it actually license — and how far is that from the claim being made about it?**
 
 Most bad appraisals fail in one of two directions. They either produce a bland strengths-and-limitations list that would apply to any paper ("small sample size, more research needed"), or they discover industry funding and stop thinking. Both skip the real work, which is figuring out where *this specific study* is load-bearing and where it is soft.
+
+## Config
+
+| Key | Required | Default | Purpose |
+|---|---|---|---|
+| notes-skill | no | | skill that records the durable facts an appraisal settles; when unset, write them to a Markdown file in the project directory |
+
+Read `config.local.yaml` in this skill's directory before anything else.
+A key missing there takes its Default from the table. If a required key is
+missing or empty, stop: name the key and its purpose, and offer to write
+`config.local.yaml` with the values the user gives. If a configured
+directory does not exist, stop and say so; do not create it.
 
 ## The two axes
 
@@ -132,6 +144,10 @@ Adapt the depth to the request — a quick "is this legit?" deserves a tight ans
 **Verification status.** Briefly: what you checked and confirmed, what you could not access, and what you are inferring rather than knowing. Never present an inference as a verified fact.
 
 A closing verification section does **not** license confident-sounding numbers earlier in the response. If a specific figure — a hazard ratio, a confidence interval, a sample size, a p-value — came from a secondary summary rather than the primary source, mark it at the point where you state it, not only in a footer. Readers quote the number from the body and never reach the caveat, and a transcribed statistic is exactly the kind of thing that drifts as it passes through summaries. When a paper is paywalled, check whether an open-access copy of the record exists (PubMed and Europe PMC carry structured abstracts with the primary results, and Europe PMC often has full text) before settling for a third-party description.
+
+## Record
+
+An appraisal often settles a fact worth keeping: the study's standing (retracted, corrected, replicated), a documented outcome switch, a verified or undisclosed tie, the claim the evidence licenses. Hand those to the configured notes skill (`notes-skill`), with the verification status as the note's sources and an honest confidence; when unset, write them to a Markdown file in the project directory. Offer this rather than doing it silently for a quick "is this legit?". The appraisal itself stays in the reply; when the user wants it kept, it is a report for the docs skill.
 
 ## Judgment calls
 

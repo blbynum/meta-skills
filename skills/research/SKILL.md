@@ -1,7 +1,7 @@
 ---
 name: research
 description: Conducts desk research — answers a question or compares options by finding, evaluating, and synthesizing sources (web pages, docs, papers, code, prior notes), then reports a synthesis that states confidence and what remains unknown. Use when the user asks to "research X", "look into", "dig into", "find out the best practice for", "compare A and B", "what does the evidence say about", "what's the current state of", "is it true that", or when another skill's workflow includes a research step. Covers framing the question, planning and running searches, weighing sources, extracting claims with quotes and provenance, resolving disagreements, deciding when to stop, parallelizing across subagents, and reporting. Not for running experiments or writing academic papers. Hands single-study appraisal and note-keeping to other skills where they are configured.
-metadata: {harness: portable, export: portable, last-verified: "2026-08-15"}
+metadata: {harness: portable, export: portable, last-verified: "2026-11-02"}
 ---
 
 # Research
@@ -31,7 +31,7 @@ setup); a landscape question needs all of it.
 
 | Key         | Required | Default | Purpose                                                                                                                        |
 | ----------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| notes-skill | no       |         | skill that reads and records durable notes, in the project's `notes/` and in the personal vault; when unset, use no notes skill |
+| notes-skill | no       |         | skill that reads and records durable notes, in the project's `notes/` and in the personal vault; when unset, write the findings to a Markdown file in the project directory |
 | appraisal-skill | no   |         | skill that appraises one study; when unset, grade it with the source-weighing table and say the appraisal is shallower |
 
 Read `config.local.yaml` in this skill's directory before anything else.
@@ -250,7 +250,12 @@ low when the primary source could not be read.
   `confidence` value. Update a superseded note in place rather than adding a
   contradiction. Offer this rather than doing it silently when the research
   was a one-off answer. When `notes-skill` is unset, or the skill it names
-  is not available, record nothing; the step 8 report holds the findings.
+  is not available, write the findings to a Markdown file in the project
+  directory, one file per subject, with the provenance records as its
+  sources.
+- A report the user wants to keep is a document, not a note: hand it to
+  the docs skill as a report, in a second call, and keep the facts it
+  settled as notes.
 - If the research fed a skill or rule, record subject-matter sources in
   the ledger of the skill that authored the artifact, not in the artifact.
 

@@ -1385,7 +1385,7 @@ claims about its own models only.
   (now corroborated by tier 1 memory docs: "target under 200 lines per
   CLAUDE.md file").
 ## Artifact subject-matter sources
-### notes skill, ste100 rule — ASD-STE100 official site (About, FAQ, Issue 9 PDF)
+### note-author skill, ste100 rule — ASD-STE100 official site (About, FAQ, Issue 9 PDF)
 - URLs: https://www.asd-ste100.org/about_STE.html ,
   https://www.asd-ste100.org/STE_faq.html ,
   https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf
