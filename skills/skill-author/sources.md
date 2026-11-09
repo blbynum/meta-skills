@@ -11,7 +11,7 @@ original wording and dates.
 
 ### Skill authoring best practices
 - URL: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
-- Last verified: 2026-10-30 (re-fetched in full for the tea-guide pass;
+- Last verified: 2026-11-09 (re-fetched in full for the webcam pass: name and description limits, third person, "a little bit pushy" absent from this page, 500-line body, one-level references, degrees of freedom, solve-don't-defer scripts, no voodoo constants, "use visual analysis" when inputs render as images, and the eval-first steps all read unchanged). Previous: 2026-10-30 (re-fetched in full for the tea-guide pass;
   every section the standards cite read unchanged: limits, third person,
   500-line body, one-level references, TOC for 100+-line files, degrees of
   freedom, scripts that solve rather than defer, no voodoo constants,
@@ -170,7 +170,7 @@ original wording and dates.
 
 ### Agent Skills specification (agentskills.io)
 - URL: https://agentskills.io/specification
-- Last verified: 2026-11-02 (fetched in full for the versioning pass; the
+- Last verified: 2026-11-09 (re-fetched for the webcam pass: the six frontmatter fields and their limits, `compatibility` 1-500 characters, `metadata` string map, 500-line body and "< 5000 tokens" instructions, references one level deep; all read unchanged). Previous: 2026-11-02 (fetched in full for the versioning pass; the
   same six fields, and no version field). Previous: 2026-10-30 (fetched in
   full for the skill-author config pass; byte-for-byte the same six fields
   and no configuration mechanism); 2026-10-24 (fetched in full). No version
