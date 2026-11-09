@@ -146,7 +146,7 @@ five artifacts traced to one dropped qualifier).
 
 ### Claude Code skills documentation
 - URL: https://code.claude.com/docs/en/skills
-- Last verified: 2026-10-30 (one WebFetch extraction for the tea-guide
+- Last verified: 2026-11-09 (one WebFetch extraction of the first 100k characters for the webcam pass: personal and project locations, descriptions loaded at startup and the body on invocation, `when_to_use` and the 1,536-character cap, `allowed-tools` cleared at the next message, `context: fork` with `background` defaulting to true and forced waiting under `-p`, injected commands under the Bash tool's 2-minute default; nothing on image files). Previous: 2026-10-30 (one WebFetch extraction for the tea-guide
   pass: the frontmatter table, personal and project locations, the
   invocation table, `$ARGUMENTS`, `${CLAUDE_SKILL_DIR}` "in bash injection
   commands", the 1,536-character listing cap and 500-line tip; all read
